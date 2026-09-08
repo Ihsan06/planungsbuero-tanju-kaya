@@ -43,8 +43,8 @@
     navServices: 'Hizmetler', navProjects: 'Projeler', navIntl: 'Uluslararası', navOffice: 'Büro', navContact: 'İletişim',
 
     heroEyebrow: 'Planlama bürosu · Coburg · Almanya',
-    heroTitle: 'İlk çizgiden <em>anahtar teslimine.</em>',
-    heroLead: 'Mimarlık, mağaza tasarımı, fuar standı, endüstriyel yapı ve restorasyon – Coburg’dan, Almanya genelinde ve yurt dışında.',
+    heroDisc: 'Mimarlık · İç mimarlık · Mağaza tasarımı · Fuar standı · Endüstriyel yapı · Restorasyon',
+    heroLead: 'İlk çizgiden anahtar teslimine – Coburg’dan, Almanya genelinde ve yurt dışında.',
     ctaProjects: 'Projeleri gör', ctaContact: 'Teklif isteyin',
 
     servEyebrow: 'Hizmetler',
