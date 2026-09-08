@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   var P = window.TK_PROJECTS || [], CATS = window.TK_CATS || {};
-  var lang = 'de', INITIAL = 24, cat = 'all', shownAll = false;
+  var lang = 'de', INITIAL = 18, cat = 'all', shownAll = false;
 
   /* ---- Galerie ---- */
   var grid = document.getElementById('pgrid'), more = document.getElementById('more'), filters = document.getElementById('filters');
@@ -13,7 +13,7 @@
     grid.innerHTML = list.slice(0, limit).map(function (p, i) {
       var idx = P.indexOf(p);
       return '<figure class="pi' + (p.c === 'industriebau' ? ' contain' : '') + '" data-i="' + idx + '" tabindex="0" role="button">' +
-        '<img src="assets/img/p/' + p.f + '" alt="' + p.n + ' – ' + catLabel(p.c) + '" loading="' + (i < 8 ? 'eager' : 'lazy') + '" width="' + p.w + '" height="' + p.h + '">' +
+        '<img src="assets/img/p/' + p.f + '" alt="' + p.n + ' – ' + catLabel(p.c) + '" loading="' + (i < 6 ? 'eager' : 'lazy') + '" width="' + p.w + '" height="' + p.h + '">' +
         '<figcaption>' + p.n + '<small>' + catLabel(p.c) + '</small></figcaption></figure>';
     }).join('');
     grid.querySelectorAll('img').forEach(function (im) {
