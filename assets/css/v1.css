@@ -66,10 +66,10 @@ p{margin:0}
 .filters button{background:none;border:0;padding:6px 0;cursor:pointer;font-family:var(--h);font-size:.68rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
 .filters button:hover{color:var(--mute)}
 .filters button.on{color:#fff;border-bottom-color:#fff}
-.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;padding-inline:3px;max-width:1900px;margin-inline:auto}
 @media(max-width:1000px){.pgrid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.pgrid{grid-template-columns:repeat(2,1fr);gap:4px}}
-.pi{position:relative;aspect-ratio:4/3;overflow:hidden;background:#0d0d0d;cursor:zoom-in;display:block;border:0;padding:0}
+@media(max-width:600px){.pgrid{grid-template-columns:repeat(2,1fr);gap:2px;padding-inline:2px}}
+.pi{position:relative;aspect-ratio:3/2;overflow:hidden;background:#0d0d0d;cursor:zoom-in;display:block;border:0;padding:0;margin:0}
 .pi img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);opacity:0;transition:opacity .6s,filter .5s,transform 1s cubic-bezier(.22,.61,.36,1)}
 .pi img.ld{opacity:1}
 .pi:hover img{filter:grayscale(0);transform:scale(1.04)}
@@ -78,7 +78,7 @@ p{margin:0}
 .pi figcaption small{display:block;font-family:var(--h);font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:#8a8a8a;margin-top:2px}
 .pi:hover figcaption{opacity:1;transform:none}
 .pi.hide{display:none}
-.more{display:flex;justify-content:center;margin-top:34px}
+.more{display:flex;justify-content:center;margin-top:40px}
 .more[hidden]{display:none}
 .btn{display:inline-block;padding:14px 34px;border:1px solid var(--line);font-family:var(--h);font-size:.66rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:#fff;background:none;cursor:pointer;transition:border-color .25s,background .25s,color .25s}
 .btn:hover{border-color:#fff}
@@ -133,16 +133,10 @@ textarea{resize:vertical;min-height:110px}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 
-/* Referenzzeile, Porträt, Assoziierte */
+/* Referenzzeile, Porträt, Referenzen-Index */
 .refline{margin:-8px 0 22px;font-size:.84rem;color:var(--mute);letter-spacing:.02em}
 .refline[hidden]{display:none}
 
-.partners{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
-@media(max-width:700px){.partners{grid-template-columns:1fr}}
-.partners>*{display:block;padding:34px 28px;border:1px solid var(--line);transition:border-color .25s,background .25s}
-.partners>*>span{display:block;margin-top:6px;font-family:var(--h);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--faint)}
-.partners a:hover{border-color:#fff;background:#0a0a0a}
-.partners b{display:block;font-family:var(--h);font-weight:300;font-size:1.5rem;letter-spacing:.06em}
 
 
 /* büro: bio + referenzen-index */

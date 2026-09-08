@@ -68,9 +68,6 @@
   /* ---- Sprache ---- */
   var TR = {
     demo: '– Planungsbüro Tanju Kaya’nın yeni web sitesi, hazırlık aşamasında.',
-    nPartners: 'Ortaklar',
-    hPartners: 'Ortaklar', cPartners: 'Birlikte çalıştığımız firmalar',
-    p1: 'Mutfaklar', p2: 'Mağaza donanımı', p3: 'Banyo donanımı',
     f5: 'Hizmet aşamaları', f5v: 'Ön tasarım, uygulama projesi, ihale, şantiye denetimi',
     f6: 'Referanslar', f6v: 'Potsdamer Platz Arkaden, Alexa Berlin, Ringcenter Berlin, Schlossparkcenter Schwerin',
     nProjects: 'Projeler', nOffice: 'Büro', nContact: 'İletişim',

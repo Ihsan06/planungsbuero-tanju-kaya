@@ -35,8 +35,6 @@
   const TR = {
     demoTitle: 'Önizleme',
     demoText: ' – Planungsbüro Tanju Kaya’nın yeni web sitesi, hazırlık aşamasında.',
-    navPartners: 'Ortaklar', partEyebrow: 'Ortaklar', partTitle: 'Birlikte çalıştığımız firmalar.',
-    p1: 'Mutfaklar', p2: 'Mağaza donanımı', p3: 'Banyo donanımı',
     q5t: 'Hizmet aşamaları', q5d: 'Ön tasarım, uygulama projesi, ihale, şantiye denetimi',
     q6t: 'Referanslar', q6d: 'Potsdamer Platz Arkaden, Alexa Berlin, Ringcenter Berlin, Schlossparkcenter Schwerin',
     brandSub: 'Planlama bürosu · Coburg',
