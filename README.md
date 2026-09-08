@@ -67,6 +67,10 @@ Zwei Stockfotos von Unsplash (Unsplash-Lizenz: kommerziell frei, keine Namensnen
 | `assets/img/hero.jpg` | Ladenbau-Innenraum mit Holzlamellen | Hero |
 | `assets/img/intl.jpg` | Skyline in der Dämmerung | Abschnitt *International* |
 
+Die acht Leistungskacheln in Variante 2 liegen dagegen auf **eigenen Projektfotos**
+(`--sbg` je Kachel im HTML). Achtung: `url()` in einer Custom Property wird relativ zum
+Stylesheet aufgelöst, nicht zum HTML – die Pfade müssen deshalb mit `/assets/…` beginnen.
+
 Beide liegen als fixierter Hintergrund (`background-attachment: fixed`) hinter dem Inhalt,
 also dieselbe Technik wie auf autohaus-diezmann.de; unter 900 px Breite fällt es auf
 `scroll` zurück, weil iOS mit `fixed` ruckelt.
@@ -89,6 +93,9 @@ umstellen sind die vier Variablen oben in `assets/css/v2.css`.
 - Freigabe, welche Telefonnummer gilt (im Impressum steht `76620`, im Seitenfuß `76672`)
 - Projektnamen prüfen (aus Dateinamen abgeleitet: Adams, Kapp, Michaelis, Okado, Uhren Meyer, Millennium …)
 - Sind allmilmö, ShopCrea und Struch noch aktuelle Partner? (shopcrea.com ist inzwischen verwaist)
+- Logos der Assoziierten: erst einbauen, wenn die Partnerschaft bestätigt **und** die
+  Logo-Nutzung von jedem Partner schriftlich freigegeben ist. Bis dahin nur Wortmarken
+  als Text, das ist rechtlich unbedenklich.
 - Logo in Vektorform, falls vorhanden
 
 ## Danach
