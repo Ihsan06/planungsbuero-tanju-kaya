@@ -1,0 +1,13 @@
+{
+  "name": "t-kaya-demo",
+  "version": "0.2.0",
+  "description": "Website-Entwurf für das Planungsbüro Tanju Kaya, Coburg – zwei Design-Varianten",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler pages deploy . --project-name=t-kaya-demo",
+    "dev": "wrangler pages dev ."
+  },
+  "devDependencies": {
+    "wrangler": "^4.101.0"
+  }
+}

@@ -3,7 +3,17 @@
 Unverbindlicher Entwurf für eine neue Website des **Planungsbüros Tanju Kaya**, Coburg.
 Erstellt von Ihsan Yılmaz als Vorschlag — noch nicht die offizielle Seite des Büros.
 
-**Live-Vorschau:** https://ihsan06.github.io/planungsbuero-tanju-kaya/
+**Live-Vorschau:** https://t-kaya-demo.pages.dev/ (Cloudflare Pages, Projekt `t-kaya-demo`)
+
+Zwei Design-Varianten, umschaltbar oben rechts:
+
+| | Datei | Idee |
+|---|---|---|
+| **Variante 1** | `index.html` | Minimal, schwarz/weiß, Raleway + Lato – bewusst nah an der jetzigen t-kaya.de, nur mit Inhalt: Galerie mit Filter und Lightbox |
+| **Variante 2** | `v2.html` | Ausführlicher: Leistungen, Projektkategorien, International, Bürovorstellung, Bronze-Akzent |
+
+Die 86 Projektfotos stammen von der bisherigen Website (`wp-json`-Export, Originalgröße meist 290 px).
+Das Porträtfoto wurde bewusst nicht übernommen.
 
 ---
 
@@ -25,16 +35,24 @@ Die Seite ist bewusst auf `noindex` gesetzt, damit der Entwurf nicht bei Google 
 ## Aufbau
 
 ```
-index.html            komplette Seite (eine Datei)
-assets/css/style.css  Design-Tokens, Layout, Animationen
-assets/js/main.js     Sprachumschaltung, Projektkacheln, Navigation, Formular
-assets/og.png         Vorschaubild für WhatsApp / LinkedIn / Google
+index.html             Variante 1 (minimal)
+v2.html                Variante 2 (ausführlich)
+assets/css/v1.css      Stil Variante 1
+assets/css/v2.css      Stil Variante 2
+assets/js/projects.js  Bildliste mit Kategorie und Projektname (aus Dateinamen abgeleitet – prüfen!)
+assets/js/v1.js        Galerie, Filter, Lightbox, DE/TR, Formular
+assets/js/v2.js        Sprachumschaltung, Kacheln, Formular
+assets/js/switch.js    Varianten-Umschalter (gleiche Mechanik wie bei den anderen Demos)
+assets/img/p/          86 Projektfotos von t-kaya.de
+assets/img/logo.png    Wortmarke von t-kaya.de (weiß, transparent)
+assets/og.png          Vorschaubild für WhatsApp / LinkedIn / Google
 ```
 
-Keine Build-Tools, keine Abhängigkeiten. Lokal ansehen:
+Keine Build-Tools. Lokal ansehen und deployen:
 
 ```bash
-python3 -m http.server 8787
+npm run dev
+npm run deploy
 ```
 
 ## Was noch fehlt (kommt vom Büro)

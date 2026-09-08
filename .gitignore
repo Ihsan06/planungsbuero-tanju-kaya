@@ -1,4 +1,4 @@
 .DS_Store
-.claude/
-ANALYSE.md
-NACHRICHT.md
+node_modules/
+.wrangler/
+.dev.vars

@@ -1,0 +1,518 @@
+[
+{
+"f": "lossaustr3a-01.jpg",
+"c": "altbau",
+"w": 425,
+"h": 567
+},
+{
+"f": "lossaustr3a-02.jpg",
+"c": "altbau",
+"w": 425,
+"h": 567
+},
+{
+"f": "lossaustr3a-03.jpg",
+"c": "altbau",
+"w": 425,
+"h": 319
+},
+{
+"f": "lossaustr3a-04.jpg",
+"c": "altbau",
+"w": 425,
+"h": 319
+},
+{
+"f": "lossaustr3a-05.jpg",
+"c": "altbau",
+"w": 425,
+"h": 319
+},
+{
+"f": "lossaustr3a-06.jpg",
+"c": "altbau",
+"w": 425,
+"h": 319
+},
+{
+"f": "lossaustr3a.jpg",
+"c": "altbau",
+"w": 425,
+"h": 560
+},
+{
+"f": "mohrenstr12.jpg",
+"c": "altbau",
+"w": 425,
+"h": 560
+},
+{
+"f": "adams-01.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 218
+},
+{
+"f": "adams-02.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 218
+},
+{
+"f": "adams-03.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 218
+},
+{
+"f": "aquarium.jpg",
+"c": "praxis",
+"w": 290,
+"h": 193
+},
+{
+"f": "architektur-01.jpg",
+"c": "architektur",
+"w": 290,
+"h": 226
+},
+{
+"f": "architektur-02.jpg",
+"c": "architektur",
+"w": 290,
+"h": 436
+},
+{
+"f": "architektur-03.jpg",
+"c": "architektur",
+"w": 290,
+"h": 436
+},
+{
+"f": "architektur-04.jpg",
+"c": "architektur",
+"w": 290,
+"h": 355
+},
+{
+"f": "architektur-05.jpg",
+"c": "architektur",
+"w": 290,
+"h": 355
+},
+{
+"f": "architektur-06.jpg",
+"c": "architektur",
+"w": 290,
+"h": 355
+},
+{
+"f": "dom-rep.jpg",
+"c": "architektur",
+"w": 290,
+"h": 436
+},
+{
+"f": "dubai-001.jpg",
+"c": "architektur",
+"w": 290,
+"h": 205
+},
+{
+"f": "dubai-002.jpg",
+"c": "architektur",
+"w": 290,
+"h": 205
+},
+{
+"f": "dubai-003.jpg",
+"c": "architektur",
+"w": 290,
+"h": 205
+},
+{
+"f": "dubai-004.jpg",
+"c": "architektur",
+"w": 290,
+"h": 435
+},
+{
+"f": "dubai-005.jpg",
+"c": "architektur",
+"w": 290,
+"h": 438
+},
+{
+"f": "dubai-006.jpg",
+"c": "architektur",
+"w": 290,
+"h": 193
+},
+{
+"f": "dubai-007.jpg",
+"c": "architektur",
+"w": 290,
+"h": 193
+},
+{
+"f": "dubai-008.jpg",
+"c": "architektur",
+"w": 290,
+"h": 205
+},
+{
+"f": "dubai-009.jpg",
+"c": "architektur",
+"w": 290,
+"h": 205
+},
+{
+"f": "dubai-01.jpg",
+"c": "architektur",
+"w": 290,
+"h": 226
+},
+{
+"f": "kapp-01.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 218
+},
+{
+"f": "kapp-02.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 218
+},
+{
+"f": "kapp-03.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 218
+},
+{
+"f": "kapp-04.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 218
+},
+{
+"f": "kapp-05.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 218
+},
+{
+"f": "ladenbau-02.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 193
+},
+{
+"f": "ladenbau-03.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 193
+},
+{
+"f": "ladenbau-04.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 193
+},
+{
+"f": "ladenbau-05.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 193
+},
+{
+"f": "michaelis-001.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 193
+},
+{
+"f": "michaelis-006.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 192
+},
+{
+"f": "michaelis-007.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 192
+},
+{
+"f": "michaelis-008.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 192
+},
+{
+"f": "michaelis-011.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 192
+},
+{
+"f": "michaelis-013.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 192
+},
+{
+"f": "michaelis-015.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 129
+},
+{
+"f": "michaelis-016.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 129
+},
+{
+"f": "michaelis-017.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 129
+},
+{
+"f": "millennium-01.jpg",
+"c": "architektur",
+"w": 290,
+"h": 387
+},
+{
+"f": "millennium-02.jpg",
+"c": "architektur",
+"w": 290,
+"h": 387
+},
+{
+"f": "millennium-03.jpg",
+"c": "architektur",
+"w": 290,
+"h": 387
+},
+{
+"f": "millennium-04.jpg",
+"c": "architektur",
+"w": 290,
+"h": 193
+},
+{
+"f": "millennium-05.jpg",
+"c": "architektur",
+"w": 290,
+"h": 193
+},
+{
+"f": "muehlgasse.jpg",
+"c": "wohnungsbau",
+"w": 290,
+"h": 218
+},
+{
+"f": "okado-001.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 192
+},
+{
+"f": "okado-002.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 220
+},
+{
+"f": "okado-003.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 220
+},
+{
+"f": "okado-004.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 220
+},
+{
+"f": "okado-005.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 220
+},
+{
+"f": "okado-006.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 220
+},
+{
+"f": "okado-007.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 220
+},
+{
+"f": "polikum-berlin.jpg",
+"c": "praxis",
+"w": 290,
+"h": 205
+},
+{
+"f": "produktdesign-01.jpg",
+"c": "produktdesign",
+"w": 290,
+"h": 218
+},
+{
+"f": "produktdesign-02.jpg",
+"c": "produktdesign",
+"w": 290,
+"h": 218
+},
+{
+"f": "produktdesign-03.jpg",
+"c": "produktdesign",
+"w": 290,
+"h": 218
+},
+{
+"f": "produktdesign-04.jpg",
+"c": "produktdesign",
+"w": 290,
+"h": 218
+},
+{
+"f": "produktdesign-05.jpg",
+"c": "produktdesign",
+"w": 290,
+"h": 218
+},
+{
+"f": "produktdesign-06.jpg",
+"c": "produktdesign",
+"w": 290,
+"h": 218
+},
+{
+"f": "produktdesign-07.jpg",
+"c": "produktdesign",
+"w": 290,
+"h": 218
+},
+{
+"f": "produktdesign-08.jpg",
+"c": "produktdesign",
+"w": 290,
+"h": 218
+},
+{
+"f": "produktdesign-09.jpg",
+"c": "produktdesign",
+"w": 290,
+"h": 218
+},
+{
+"f": "produktdesign-10.jpg",
+"c": "produktdesign",
+"w": 290,
+"h": 218
+},
+{
+"f": "produktdesign-11.jpg",
+"c": "produktdesign",
+"w": 290,
+"h": 218
+},
+{
+"f": "produktdesign-12.jpg",
+"c": "produktdesign",
+"w": 290,
+"h": 218
+},
+{
+"f": "produktdesign-13.jpg",
+"c": "produktdesign",
+"w": 290,
+"h": 218
+},
+{
+"f": "schnitt-werkshalle-01.jpg",
+"c": "industriebau",
+"w": 290,
+"h": 116
+},
+{
+"f": "schnitt-werkshalle-02.jpg",
+"c": "industriebau",
+"w": 290,
+"h": 116
+},
+{
+"f": "schnitt-werkshalle-03.jpg",
+"c": "industriebau",
+"w": 290,
+"h": 116
+},
+{
+"f": "uhren-meyer-01.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 193
+},
+{
+"f": "uhren-meyer-02.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 193
+},
+{
+"f": "uhren-meyer-03.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 193
+},
+{
+"f": "uhren-meyer-04.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 193
+},
+{
+"f": "uhren-meyer-05.jpg",
+"c": "ladenbau",
+"w": 290,
+"h": 193
+},
+{
+"f": "walkmuehlgasse.jpg",
+"c": "wohnungsbau",
+"w": 290,
+"h": 218
+},
+{
+"f": "wohnhaus-02.jpg",
+"c": "architektur",
+"w": 290,
+"h": 226
+},
+{
+"f": "wohnhaus.jpg",
+"c": "architektur",
+"w": 290,
+"h": 218
+},
+{
+"f": "zahnarztpraxis.jpg",
+"c": "praxis",
+"w": 290,
+"h": 438
+}
+]

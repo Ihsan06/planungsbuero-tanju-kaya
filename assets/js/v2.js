@@ -3,65 +3,15 @@
   "use strict";
 
   /* ---------------------------------------------------------
-     1. Projektkacheln (Platzhalter-Grafiken)
+     1. Projektkacheln (Fotos von der bisherigen Website)
      --------------------------------------------------------- */
-  const G = '<rect width="400" height="300" fill="#121218"/><g stroke="rgba(237,234,229,.06)" stroke-width="1">' +
-    [40, 80, 120, 160, 200, 240, 280].map(y => `<path d="M0 ${y}h400"/>`).join('') +
-    [40, 80, 120, 160, 200, 240, 280, 320, 360].map(x => `<path d="M${x} 0v300"/>`).join('') + '</g>';
-
-  const A = 'stroke="#c08b4a" stroke-width="1.6" fill="none" stroke-linejoin="round"';
-  const B = 'stroke="rgba(237,234,229,.30)" stroke-width="1.2" fill="none"';
-
-  const ART = {
-    villa: `<svg viewBox="0 0 400 300">${G}
-      <g ${A}><path d="M60 230h280M90 230v-90h130v90M220 230v-60h90v60"/>
-      <path d="M78 140h154M208 170h114"/><path d="M110 165h35v30h-35zM165 165h35v30h-35zM245 190h30v40h-30z"/></g>
-      <g ${B}><path d="M40 230h320M60 250v-20M340 250v-20"/><path d="M120 120v-20h20"/></g></svg>`,
-
-    halle: `<svg viewBox="0 0 400 300">${G}
-      <g ${A}><path d="M50 235h300M70 235v-80M330 235v-80"/>
-      <path d="M70 155l40-35 40 35 40-35 40 35 40-35 40 35"/>
-      <path d="M110 120v35M190 120v35M270 120v35"/>
-      <path d="M90 235v-45h50v45M170 235v-30h60v30"/></g>
-      <g ${B}><path d="M40 235h320"/><path d="M300 205h20v30h-20z"/></g></svg>`,
-
-    laden: `<svg viewBox="0 0 400 300">${G}
-      <g ${A}><path d="M55 240h290M75 240V95h250v145"/>
-      <path d="M75 130h250"/><path d="M100 160h90M100 185h90M100 210h90"/>
-      <path d="M230 240v-55h70v55"/><path d="M230 205h70"/></g>
-      <g ${B}><path d="M75 95l125-35 125 35"/><path d="M140 160v50M170 160v50"/></g></svg>`,
-
-    altbau: `<svg viewBox="0 0 400 300">${G}
-      <g ${A}><path d="M70 245h260M90 245V85h220v160"/>
-      <path d="M90 120h220M90 175h220"/>
-      <path d="M125 100a15 15 0 0130 0v20h-30zM185 100a15 15 0 0130 0v20h-30zM245 100a15 15 0 0130 0v20h-30z"/>
-      <path d="M125 145h30v30h-30zM185 145h30v30h-30zM245 145h30v30h-30z"/>
-      <path d="M175 245v-45h50v45"/></g>
-      <g ${B}><path d="M78 85h244"/><path d="M60 245h280"/></g></svg>`,
-
-    wohnen: `<svg viewBox="0 0 400 300">${G}
-      <g ${A}><path d="M60 245h280"/>
-      <path d="M80 245V125h90v120M180 245V85h80v160M270 245V150h60v95"/>
-      <path d="M80 165h90M80 205h90M180 125h80M180 165h80M180 205h80M270 190h60"/>
-      <path d="M100 135h20v20h-20zM130 135h20v20h-20zM200 95h20v20h-20zM230 95h20v20h-20zM290 160h20v20h-20z"/></g>
-      <g ${B}><path d="M50 245h300"/></g></svg>`,
-
-    messe: `<svg viewBox="0 0 400 300">${G}
-      <g ${A}><path d="M70 240h260"/>
-      <path d="M90 240V110h180v130"/><path d="M90 110h180"/>
-      <path d="M110 240v-50h70v50M110 190h70"/>
-      <path d="M210 240v-80h40v80"/>
-      <path d="M270 240V150h60v90M270 190h60"/></g>
-      <g ${B}><path d="M85 105h190M120 140h120"/><path d="M150 60v45M210 60v45"/><path d="M140 55h80v10h-80z"/></g></svg>`
-  };
-
   const PROJECTS = [
-    { art: 'villa',  tag: { de: 'Architektur',      tr: 'Mimarlık' },        t: { de: 'Villen & Wohnhäuser',       tr: 'Villalar & Konutlar' },      m: { de: 'Entwurf bis Ausführung', tr: 'Tasarımdan uygulamaya' } },
-    { art: 'halle',  tag: { de: 'Industriebau',     tr: 'Endüstriyel yapı' },t: { de: 'Produktions- & Lagerhallen',tr: 'Üretim & depo binaları' },   m: { de: 'Gewerbe',                tr: 'Ticari' } },
-    { art: 'laden',  tag: { de: 'Ladenbau',         tr: 'Mağaza tasarımı' }, t: { de: 'Verkaufsflächen & Filialen',tr: 'Satış alanları & şubeler' }, m: { de: 'Innenausbau',            tr: 'İç yapım' } },
-    { art: 'altbau', tag: { de: 'Altbausanierung',  tr: 'Restorasyon' },     t: { de: 'Sanierung & Denkmalpflege', tr: 'Restorasyon & koruma' },     m: { de: 'Bestand',                tr: 'Mevcut yapı' } },
-    { art: 'wohnen', tag: { de: 'Wohnungsbau',      tr: 'Konut yapımı' },    t: { de: 'Mehrfamilienhäuser',        tr: 'Çok aileli konutlar' },      m: { de: 'Neubau',                 tr: 'Yeni yapı' } },
-    { art: 'messe',  tag: { de: 'Messebau',         tr: 'Fuar standı' },     t: { de: 'Messestände & Displays',    tr: 'Fuar standları & teşhir' },  m: { de: 'Temporär',               tr: 'Geçici' } }
+    { img: 'wohnhaus-02.jpg',        tag: { de: 'Architektur',     tr: 'Mimarlık' },         t: { de: 'Villen & Wohnhäuser',        tr: 'Villalar & Konutlar' },       m: { de: 'Entwurf bis Ausführung', tr: 'Tasarımdan uygulamaya' } },
+    { img: 'okado-002.jpg',          tag: { de: 'Ladenbau',        tr: 'Mağaza tasarımı' },  t: { de: 'Verkaufsflächen & Filialen', tr: 'Satış alanları & şubeler' },  m: { de: 'Innenausbau',            tr: 'İç yapım' } },
+    { img: 'lossaustr3a.jpg',        tag: { de: 'Altbausanierung', tr: 'Restorasyon' },      t: { de: 'Sanierung & Denkmalpflege',  tr: 'Restorasyon & koruma' },      m: { de: 'Coburg',                 tr: 'Coburg' } },
+    { img: 'walkmuehlgasse.jpg',     tag: { de: 'Wohnungsbau',     tr: 'Konut yapımı' },     t: { de: 'Mehrfamilienhäuser',         tr: 'Çok aileli konutlar' },       m: { de: 'Neubau',                 tr: 'Yeni yapı' } },
+    { img: 'kapp-05.jpg',            tag: { de: 'Messebau',        tr: 'Fuar standı' },      t: { de: 'Messestände & Displays',     tr: 'Fuar standları & teşhir' },   m: { de: 'Temporär',               tr: 'Geçici' } },
+    { img: 'produktdesign-06.jpg',   tag: { de: 'Produktdesign',   tr: 'Ürün tasarımı' },    t: { de: 'Möbel bis zur Serienreife',  tr: 'Seri üretime kadar mobilya' },m: { de: 'Design',                 tr: 'Tasarım' } }
   ];
 
   const grid = document.getElementById('projGrid');
@@ -70,7 +20,7 @@
       <a class="proj" href="#kontakt">
         <div class="proj-art">
           <span class="proj-tag" data-tag>${p.tag.de}</span>
-          ${ART[p.art]}
+          <img src="assets/img/p/${p.img}" alt="" loading="lazy">
         </div>
         <div class="proj-body">
           <h3 data-t>${p.t.de}</h3>
@@ -112,7 +62,7 @@
     projEyebrow: 'Projeler',
     projTitle: 'Görülmeye değer referanslar.',
     projLead: 'Her kategori kendi sayfasını alır: fotoğraflar, kısa açıklama, yer ve yıl – müşterinin de Google’ın da aradığı tam olarak bu.',
-    projNote: 'Buradaki görseller yer tutucudur. Orijinal fotoğraflarınızı gönderdiğinizde burada gerçek projeleriniz olur – her biri kendi alt sayfası, galerisi ve metniyle.',
+    projNote: 'Fotoğraflar mevcut sitenizden alındı, bu yüzden çözünürlük düşük. Orijinal fotoğraflarınızı gönderdiğinizde her kategori kendi alt sayfasını, galerisini ve metnini alır – net ve büyük.',
 
     intlEyebrow: 'Uluslararası',
     intlTitle: 'Coburg’da planlandı. Altı ülkede inşa edildi.',
