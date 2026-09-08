@@ -9,7 +9,7 @@ Zwei Design-Varianten, umschaltbar oben rechts:
 | | Datei | Idee |
 |---|---|---|
 | **Variante 1** | `index.html` | Minimal, schwarz/weiß, Raleway + Lato – bewusst nah an der jetzigen t-kaya.de, nur mit Inhalt: Galerie mit Filter und Lightbox |
-| **Variante 2** | `v2.html` | Ausführlicher: Leistungen, Projektkategorien, International, Bürovorstellung, Bronze-Akzent |
+| **Variante 2** | `v2.html` | Ausführlicher: Foto-Hero mit Parallax, Leistungen, Projektkategorien, International, Assoziierte, Bürovorstellung, Bronze-Akzent |
 
 Die 86 Projektfotos und das Porträt stammen von der bisherigen Website (`wp-json`-Export,
 Originalgröße meist 290 px). Kategorien, Referenznamen (Potsdamer Platz Arkaden, Alexa Berlin,
@@ -45,6 +45,7 @@ assets/js/projects.js  Bildliste mit Kategorie und Projektname (aus Dateinamen a
 assets/js/v1.js        Galerie, Filter, Lightbox, DE/TR, Formular
 assets/js/v2.js        Sprachumschaltung, Kacheln, Formular
 assets/js/switch.js    Varianten-Umschalter (gleiche Mechanik wie bei den anderen Demos)
+assets/img/hero.jpg    Hero-Foto Variante 2 (aus wohnhaus-02.jpg hochskaliert)
 assets/img/p/          86 Projektfotos von t-kaya.de
 assets/img/logo.png    Wortmarke von t-kaya.de (weiß, transparent)
 assets/og.png          Vorschaubild für WhatsApp / LinkedIn / Google

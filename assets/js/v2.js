@@ -44,12 +44,8 @@
 
     heroEyebrow: 'Planlama bürosu · Coburg · Almanya',
     heroTitle: 'İlk çizgiden <em>anahtar teslimine.</em>',
-    heroLead: 'Mimarlık ve iç mimarlık, mağaza tasarımı, fuar standı, endüstriyel yapı ve restorasyon. Seri üretime veya anahtar teslimine kadar yanınızdayız – Coburg’da, Almanya genelinde ve yurt dışında.',
+    heroLead: 'Mimarlık, mağaza tasarımı, fuar standı, endüstriyel yapı ve restorasyon – Coburg’dan, Almanya genelinde ve yurt dışında.',
     ctaProjects: 'Projeleri gör', ctaContact: 'Teklif isteyin',
-    fact1t: 'Konum',        fact1d: 'Coburg, Bavyera',
-    fact2t: 'Üyelik',       fact2d: 'VDA No. 4028',
-    fact3t: 'Yönetim',      fact3d: 'Dipl.-Ing. (FH) Tanju Kaya',
-    fact4t: 'Diller',       fact4d: 'Almanca · Türkçe',
 
     servEyebrow: 'Hizmetler',
     servTitle: 'Tek büro. Bütün süreç.',
@@ -66,7 +62,6 @@
     projEyebrow: 'Projeler',
     projTitle: 'Görülmeye değer referanslar.',
     projLead: 'Her kategori kendi sayfasını alır: fotoğraflar, kısa açıklama, yer ve yıl – müşterinin de Google’ın da aradığı tam olarak bu.',
-    projNote: 'Fotoğraflar mevcut sitenizden alındı, bu yüzden çözünürlük düşük. Orijinal fotoğraflarınızı gönderdiğinizde her kategori kendi alt sayfasını, galerisini ve metnini alır – net ve büyük.',
 
     intlEyebrow: 'Uluslararası',
     intlTitle: 'Coburg’da planlandı. Altı ülkede inşa edildi.',
@@ -150,6 +145,22 @@
         burger.setAttribute('aria-expanded', 'false');
       }
     });
+  }
+
+  const heroImg = document.getElementById('heroImg');
+  const hero = document.querySelector('.hero');
+  if (heroImg && hero && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // transform ist eine reine Compositor-Eigenschaft – direkt im Scroll-Handler ist das guenstig
+    // und faellt nicht aus, wenn requestAnimationFrame in einem Hintergrund-Tab pausiert.
+    const move = function () {
+      const h = hero.offsetHeight;
+      if (window.scrollY > h + 200) return;
+      const shift = Math.min(window.scrollY * 0.28, h * 0.2);  // nie ueber die Bildkante hinaus
+      heroImg.style.transform = 'translate3d(0,' + shift.toFixed(1) + 'px,0)';
+    };
+    move();
+    window.addEventListener('scroll', move, { passive: true });
+    window.addEventListener('resize', move, { passive: true });
   }
 
   const head = document.getElementById('head');
