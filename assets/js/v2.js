@@ -145,22 +145,6 @@
     });
   }
 
-  const heroImg = document.getElementById('heroImg');
-  const hero = document.querySelector('.hero');
-  if (heroImg && hero && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    // transform ist eine reine Compositor-Eigenschaft – direkt im Scroll-Handler ist das guenstig
-    // und faellt nicht aus, wenn requestAnimationFrame in einem Hintergrund-Tab pausiert.
-    const move = function () {
-      const h = hero.offsetHeight;
-      if (window.scrollY > h + 200) return;
-      const shift = Math.min(window.scrollY * 0.28, h * 0.2);  // nie ueber die Bildkante hinaus
-      heroImg.style.transform = 'translate3d(0,' + shift.toFixed(1) + 'px,0)';
-    };
-    move();
-    window.addEventListener('scroll', move, { passive: true });
-    window.addEventListener('resize', move, { passive: true });
-  }
-
   const head = document.getElementById('head');
   const onScroll = () => head.classList.toggle('is-stuck', window.scrollY > 8);
   onScroll();

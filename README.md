@@ -58,12 +58,21 @@ npm run dev
 npm run deploy
 ```
 
-## Hero-Foto Variante 2
+## Bilder Variante 2
 
-`assets/img/hero.jpg` ist ein Stockfoto von Unsplash (Unsplash-Lizenz: kommerziell frei,
-keine Namensnennung nötig). Bewusst ein abstraktes Fassadendetail und kein fertiges
-Gebäude, damit niemand es für ein Projekt des Büros hält. **Sobald eigene Fotos da sind,
-ersetzen.** Kandidaten liegen in `Desktop/Kaja-Notizen/bildvarianten.png`.
+Zwei Stockfotos von Unsplash (Unsplash-Lizenz: kommerziell frei, keine Namensnennung nötig):
+
+| Datei | Motiv | Wo |
+|---|---|---|
+| `assets/img/hero.jpg` | Ladenbau-Innenraum mit Holzlamellen | Hero |
+| `assets/img/intl.jpg` | Skyline in der Dämmerung | Abschnitt *International* |
+
+Beide liegen als fixierter Hintergrund (`background-attachment: fixed`) hinter dem Inhalt,
+also dieselbe Technik wie auf autohaus-diezmann.de; unter 900 px Breite fällt es auf
+`scroll` zurück, weil iOS mit `fixed` ruckelt.
+
+**Sobald eigene Fotos da sind, ersetzen.** Weitere Kandidaten liegen in
+`Desktop/Kaja-Notizen/bildvarianten.png` und `international-bg.png`.
 
 ## Akzentfarbe
 
