@@ -9,7 +9,7 @@ Zwei Design-Varianten, umschaltbar oben rechts:
 | | Datei | Idee |
 |---|---|---|
 | **Variante 1** | `index.html` | Minimal, schwarz/weiß, Raleway + Lato – bewusst nah an der jetzigen t-kaya.de, nur mit Inhalt: Galerie mit Filter und Lightbox |
-| **Variante 2** | `v2.html` | Ausführlicher: Foto-Hero mit Parallax, Leistungen, Projektkategorien, International, Assoziierte, Bürovorstellung, Bronze-Akzent |
+| **Variante 2** | `v2.html` | Ausführlicher: Foto-Hero mit Parallax, Leistungen, Projektkategorien, International, Assoziierte, Bürovorstellung, Türkis-Akzent |
 
 Die 86 Projektfotos und das Porträt stammen von der bisherigen Website (`wp-json`-Export,
 Originalgröße meist 290 px). Kategorien, Referenznamen (Potsdamer Platz Arkaden, Alexa Berlin,
@@ -45,7 +45,7 @@ assets/js/projects.js  Bildliste mit Kategorie und Projektname (aus Dateinamen a
 assets/js/v1.js        Galerie, Filter, Lightbox, DE/TR, Formular
 assets/js/v2.js        Sprachumschaltung, Kacheln, Formular
 assets/js/switch.js    Varianten-Umschalter (gleiche Mechanik wie bei den anderen Demos)
-assets/img/hero.jpg    Hero-Foto Variante 2 (aus wohnhaus-02.jpg hochskaliert)
+assets/img/hero.jpg    Hero-Foto Variante 2 (Unsplash, siehe unten)
 assets/img/p/          86 Projektfotos von t-kaya.de
 assets/img/logo.png    Wortmarke von t-kaya.de (weiß, transparent)
 assets/og.png          Vorschaubild für WhatsApp / LinkedIn / Google
@@ -57,6 +57,20 @@ Keine Build-Tools. Lokal ansehen und deployen:
 npm run dev
 npm run deploy
 ```
+
+## Hero-Foto Variante 2
+
+`assets/img/hero.jpg` ist ein Stockfoto von [Unsplash](https://unsplash.com/photos/modern-architecture-with-concrete-curves-and-glass-facade-pLM1bnJtmMU)
+(Sarthak Sachdeva, Unsplash-Lizenz: kommerziell frei, keine Namensnennung nötig).
+Bewusst ein abstraktes Architekturdetail und kein fertiges Gebäude, damit niemand
+es für ein Projekt des Büros hält. **Sobald eigene Fotos da sind, ersetzen.**
+
+## Akzentfarbe
+
+`--accent: #2c9691` – ein İznik-Türkis als Anspielung auf die türkische Fliesenkunst,
+statt des vorherigen Bronzetons. Kontrast auf dem Seitenhintergrund 5,5:1,
+Text auf Akzentflächen (`--accent-ink: #031917`) 5,1:1, beides über WCAG AA.
+Variante 1 bleibt bewusst rein schwarz-weiß.
 
 ## Was noch fehlt (kommt vom Büro)
 
