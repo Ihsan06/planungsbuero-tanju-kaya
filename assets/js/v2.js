@@ -43,8 +43,6 @@
     navServices: 'Hizmetler', navProjects: 'Projeler', navIntl: 'Uluslararası', navOffice: 'Büro', navContact: 'İletişim',
 
     heroEyebrow: 'Planlama bürosu · Coburg · Almanya',
-    heroDisc: 'Mimarlık · İç mimarlık · Mağaza tasarımı · Fuar standı · Endüstriyel yapı · Restorasyon',
-    heroLead: 'İlk çizgiden anahtar teslimine – Coburg’dan, Almanya genelinde ve yurt dışında.',
     ctaProjects: 'Projeleri gör', ctaContact: 'Teklif isteyin',
 
     servEyebrow: 'Hizmetler',

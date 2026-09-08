@@ -150,16 +150,9 @@ p{margin:0}
   margin:20px 0 0;font-size:clamp(2.9rem,10.5vw,8rem);font-weight:200;
   letter-spacing:.02em;line-height:.98;color:var(--accent);text-transform:uppercase;
 }
-.hero-disc{
-  margin:26px 0 0;padding-top:20px;max-width:46ch;
-  border-top:1px solid var(--line-strong);
-  font-size:.72rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
-  line-height:2.1;color:var(--fg-dim);
-}
-.hero .lead{margin-top:18px;max-width:44ch}
-@media (max-width:520px){.hero-disc{letter-spacing:.15em;font-size:.66rem;line-height:2}}
 
-.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:clamp(30px,4vw,46px);padding-top:clamp(26px,3.5vw,38px);border-top:1px solid var(--line-strong);max-width:min(100%,620px)}
 .btn{
   position:relative;display:inline-flex;align-items:center;gap:14px;
   padding:15px 28px;text-decoration:none;
