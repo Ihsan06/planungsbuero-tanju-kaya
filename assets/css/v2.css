@@ -11,10 +11,10 @@
   --fg-faint:#6f6b65;
   --line:rgba(237,234,229,.13);
   --line-strong:rgba(237,234,229,.28);
-  --accent:#2c9691;        /* Iznik-Tuerkis: Anspielung auf die tuerkische Fliesenkunst */
-  --accent-hi:#3ab3ad;
-  --accent-ink:#031917;    /* Text auf Akzentflaechen, Kontrast 5.1:1 */
-  --accent-soft:rgba(44,150,145,.14);
+  --accent:#e9e3d9;        /* Knochenweiss – kein Farbton, die Hierarchie traegt die Typografie */
+  --accent-hi:#ffffff;
+  --accent-ink:#14140f;    /* Text auf Akzentflaechen, Kontrast 14.5:1 */
+  --accent-soft:rgba(233,227,217,.10);
 
   --maxw:1240px;
   --gutter:clamp(20px,5vw,64px);
@@ -135,10 +135,10 @@ p{margin:0}
 .hero{position:relative;overflow:hidden;padding:clamp(88px,13vw,168px) 0 clamp(72px,10vw,124px);min-height:min(78vh,760px);display:flex;align-items:center}
 .hero-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .hero-img{position:absolute;left:0;top:-20%;width:100%;height:140%;object-fit:cover;object-position:50% 50%;will-change:transform;transform:translate3d(0,0,0)}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(58,179,173,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(58,179,173,.07) 1px,transparent 1px);background-size:64px 64px}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(237,234,229,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(237,234,229,.05) 1px,transparent 1px);background-size:64px 64px}
 .hero-bg::after{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,rgba(9,14,14,.94) 0%,rgba(9,14,14,.84) 42%,rgba(9,14,14,.52) 74%,rgba(9,14,14,.7) 100%),
+  background:linear-gradient(90deg,rgba(10,10,11,.93) 0%,rgba(10,10,11,.82) 42%,rgba(10,10,11,.5) 74%,rgba(10,10,11,.68) 100%),
              linear-gradient(180deg,rgba(11,11,12,.72) 0%,transparent 34%,transparent 60%,var(--bg) 100%);
 }
 @media (max-width:760px){
@@ -146,8 +146,8 @@ p{margin:0}
 }
 @media (prefers-reduced-motion:reduce){.hero-img{transform:none!important}}
 .hero-in{position:relative;z-index:1}
-.hero h1{margin:16px 0 0;max-width:14ch}
-.hero h1 em{font-style:normal;color:var(--accent-hi)}
+.hero h1{margin:16px 0 0;max-width:14ch;color:#a9a6a0}
+.hero h1 em{font-style:normal;color:var(--accent)}
 .hero .lead{margin-top:20px;max-width:44ch}
 
 .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}

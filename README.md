@@ -60,17 +60,17 @@ npm run deploy
 
 ## Hero-Foto Variante 2
 
-`assets/img/hero.jpg` ist ein Stockfoto von [Unsplash](https://unsplash.com/photos/modern-architecture-with-concrete-curves-and-glass-facade-pLM1bnJtmMU)
-(Sarthak Sachdeva, Unsplash-Lizenz: kommerziell frei, keine Namensnennung nötig).
-Bewusst ein abstraktes Architekturdetail und kein fertiges Gebäude, damit niemand
-es für ein Projekt des Büros hält. **Sobald eigene Fotos da sind, ersetzen.**
+`assets/img/hero.jpg` ist ein Stockfoto von Unsplash (Unsplash-Lizenz: kommerziell frei,
+keine Namensnennung nötig). Bewusst ein abstraktes Fassadendetail und kein fertiges
+Gebäude, damit niemand es für ein Projekt des Büros hält. **Sobald eigene Fotos da sind,
+ersetzen.** Kandidaten liegen in `Desktop/Kaja-Notizen/bildvarianten.png`.
 
 ## Akzentfarbe
 
-`--accent: #2c9691` – ein İznik-Türkis als Anspielung auf die türkische Fliesenkunst,
-statt des vorherigen Bronzetons. Kontrast auf dem Seitenhintergrund 5,5:1,
-Text auf Akzentflächen (`--accent-ink: #031917`) 5,1:1, beides über WCAG AA.
-Variante 1 bleibt bewusst rein schwarz-weiß.
+`--accent: #e9e3d9` – Knochenweiß, also bewusst kein Farbton: die Hierarchie im Hero
+entsteht über Helligkeit statt Farbe. Kontrast 15:1 auf dem Hintergrund, 14,5:1 für Text
+auf Akzentflächen. Farbige Alternativen liegen in `Desktop/Kaja-Notizen/farbvarianten.png`;
+umstellen sind die vier Variablen oben in `assets/css/v2.css`.
 
 ## Was noch fehlt (kommt vom Büro)
 
