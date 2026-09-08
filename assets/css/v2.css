@@ -237,7 +237,7 @@ section{position:relative}
   background:linear-gradient(160deg,#17171c,#0d0d10);
   display:flex;align-items:center;justify-content:center;overflow:hidden
 }
-.portrait svg{width:100%;height:100%;position:absolute;inset:0}
+.portrait img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
 .portrait figcaption{
   position:absolute;bottom:0;left:0;right:0;padding:16px 20px;z-index:2;
   font-size:.75rem;letter-spacing:.05em;color:var(--fg-faint);
@@ -295,3 +295,12 @@ textarea{resize:vertical;min-height:130px}
 .bp-draw{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 4.5s var(--ease) .3s forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
 @media (prefers-reduced-motion:reduce){.bp-draw{animation:none;stroke-dashoffset:0}}
+
+/* assoziierte */
+.partners{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(max-width:700px){.partners{grid-template-columns:1fr}}
+.partners>*{display:block;padding:36px 30px;background:var(--bg);text-decoration:none;transition:background .3s}
+.partners>*>span{display:block;margin-top:8px;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-faint)}
+.partners a:hover{background:var(--bg-3)}
+.partners b{display:block;font-size:1.6rem;font-weight:300;letter-spacing:-.02em}
+

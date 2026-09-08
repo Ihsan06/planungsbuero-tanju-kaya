@@ -1,7 +1,6 @@
 # Planungsbüro Tanju Kaya — Website-Entwurf
 
-Unverbindlicher Entwurf für eine neue Website des **Planungsbüros Tanju Kaya**, Coburg.
-Erstellt von Ihsan Yılmaz als Vorschlag — noch nicht die offizielle Seite des Büros.
+Neue Website für das **Planungsbüro Tanju Kaya**, Coburg — in Arbeit. Erstellt von Ihsan Yılmaz.
 
 **Live-Vorschau:** https://t-kaya-demo.pages.dev/ (Cloudflare Pages, Projekt `t-kaya-demo`)
 
@@ -12,8 +11,11 @@ Zwei Design-Varianten, umschaltbar oben rechts:
 | **Variante 1** | `index.html` | Minimal, schwarz/weiß, Raleway + Lato – bewusst nah an der jetzigen t-kaya.de, nur mit Inhalt: Galerie mit Filter und Lightbox |
 | **Variante 2** | `v2.html` | Ausführlicher: Leistungen, Projektkategorien, International, Bürovorstellung, Bronze-Akzent |
 
-Die 86 Projektfotos stammen von der bisherigen Website (`wp-json`-Export, Originalgröße meist 290 px).
-Das Porträtfoto wurde bewusst nicht übernommen.
+Die 86 Projektfotos und das Porträt stammen von der bisherigen Website (`wp-json`-Export,
+Originalgröße meist 290 px). Kategorien, Referenznamen (Potsdamer Platz Arkaden, Alexa Berlin,
+Ringcenter Berlin, Schlossparkcenter Schwerin), der Messebau-Text und die drei Assoziierten
+(allmilmö, ShopCrea, Struch) kommen von der Site-Version von 2016 aus dem Internet Archive;
+Leistungsphasen aus dem heinze.de-Profil.
 
 ---
 
@@ -61,6 +63,8 @@ npm run deploy
 - Kurztexte je Projekt: Ort, Jahr, Bauherr, Aufgabe
 - Porträtfoto Tanju Kaya, Bürofotos
 - Freigabe, welche Telefonnummer gilt (im Impressum steht `76620`, im Seitenfuß `76672`)
+- Projektnamen prüfen (aus Dateinamen abgeleitet: Adams, Kapp, Michaelis, Okado, Uhren Meyer, Millennium …)
+- Sind allmilmö, ShopCrea und Struch noch aktuelle Partner? (shopcrea.com ist inzwischen verwaist)
 - Logo in Vektorform, falls vorhanden
 
 ## Danach

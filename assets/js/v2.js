@@ -33,8 +33,12 @@
      2. Sprachumschaltung DE / TR
      --------------------------------------------------------- */
   const TR = {
-    demoTitle: 'Taslak',
-    demoText: ' – Planungsbüro Tanju Kaya için hazırlanmış örnek tasarım. Henüz yayında değil. Hazırlayan: Ihsan Yılmaz.',
+    demoTitle: 'Önizleme',
+    demoText: ' – Planungsbüro Tanju Kaya’nın yeni web sitesi, hazırlık aşamasında.',
+    navPartners: 'Ortaklar', partEyebrow: 'Ortaklar', partTitle: 'Birlikte çalıştığımız firmalar.',
+    p1: 'Mutfaklar', p2: 'Mağaza donanımı', p3: 'Banyo donanımı',
+    q5t: 'Hizmet aşamaları', q5d: 'Ön tasarım, uygulama projesi, ihale, şantiye denetimi',
+    q6t: 'Referanslar', q6d: 'Potsdamer Platz Arkaden, Alexa Berlin, Ringcenter Berlin, Schlossparkcenter Schwerin',
     brandSub: 'Planlama bürosu · Coburg',
     navServices: 'Hizmetler', navProjects: 'Projeler', navIntl: 'Uluslararası', navOffice: 'Büro', navContact: 'İletişim',
 
@@ -51,8 +55,8 @@
     servTitle: 'Tek büro. Bütün süreç.',
     servLead: 'Tasarım, ruhsat projesi, uygulama ve şantiye yönetimi – hepsi tek elden. Yatırımcılar, mağazalar, sanayi ve özel müşteriler için.',
     s1t: 'Mimarlık & iç mimarlık', s1d: 'Konutlar, villalar ve iç mekânlar – tasarımdan ruhsata ve uygulama projesine kadar.',
-    s2t: 'Mağaza tasarımı',        s2d: 'Satan satış alanları: konsept, mobilya, aydınlatma ve işletme açıkken uygulama.',
-    s3t: 'Fuar standı',            s3d: 'Akılda kalan fuar standları – planlanır, üretilir ve zamanında kurulur.',
+    s2t: 'Mağaza tasarımı',        s2d: 'Satan satış alanları – Potsdamer Platz Arkaden, Alexa ve Ringcenter Berlin, Schlossparkcenter Schwerin gibi.',
+    s3t: 'Fuar standı',            s3d: 'Akılda kalan fuar standları – Frankfurt, Münih, Köln, Berlin, Düsseldorf, Hannover, Milano, Madrid ve Paris fuarlarında.',
     s4t: 'Endüstriyel yapı',       s4d: 'Hangarlar, üretim ve işletme binaları. İşlevsel planlanır, ekonomik inşa edilir.',
     s5t: 'Restorasyon',            s5d: 'Mevcut yapıyı korumak ve geliştirmek – enerji, taşıyıcı sistem ve tasarım.',
     s6t: 'Tarihi eser koruma',     s6d: 'Tescilli yapıların ilgili kurumlarla uyum içinde restorasyonu.',
@@ -72,7 +76,6 @@
     officeEyebrow: 'Büro',
     officeTitle: 'Her türlü yapı işinde güvenilir çözüm ortağınız.',
     officeLead: 'Tasarımda kapsamlı kalite ve sizin isteklerinize göre bir uygulama – gücümüz bu. Seri üretime veya anahtar teslimine kadar yanınızdayız.',
-    portraitCap: 'Yer tutucu – portre fotoğrafınız buraya gelecek',
     q1t: 'Yönetim',    q1d: 'Dipl.-Ing. (FH) Tanju Kaya',
     q2t: 'Oda / birlik',q2d: 'Alman Mimarlar Birliği (VDA), üye no. 4028',
     q3t: 'Merkez',     q3d: 'Dr.-Hans-Schack-Straße 28, 96450 Coburg',
@@ -90,7 +93,7 @@
     fCol1: 'Planungsbüro Tanju Kaya', fCol2: 'Menü', fCol3: 'İletişim',
     footAbout: 'Mimarlık, mağaza tasarımı, fuar standı, endüstriyel yapı, restorasyon ve tasarım – Coburg’dan.',
     fImpressum: 'Künye', fPrivacy: 'Gizlilik',
-    footDemo: 'Taslak / Entwurf · Ihsan Yılmaz'
+    footDemo: 'Web sitesi: Ihsan Yılmaz'
   };
 
   const DE = {};

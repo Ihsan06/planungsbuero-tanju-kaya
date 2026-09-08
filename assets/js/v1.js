@@ -20,6 +20,8 @@
       if (im.complete) im.classList.add('ld'); else im.addEventListener('load', function () { im.classList.add('ld'); });
     });
     more.hidden = !(cat === 'all' && !shownAll && list.length > INITIAL);
+    var R = window.TK_REFS || {}, ref = document.getElementById('refline');
+    if (ref) { ref.textContent = R[cat] ? R[cat][lang] || R[cat].de : ''; ref.hidden = !R[cat]; }
   }
   filters.innerHTML = '<button class="on" data-c="all"></button>' + Object.keys(CATS).map(function (c) {
     return '<button data-c="' + c + '"></button>';
@@ -65,7 +67,12 @@
 
   /* ---- Sprache ---- */
   var TR = {
-    demo: 'Taslak – Planungsbüro Tanju Kaya için örnek tasarım, henüz yayında değil. Hazırlayan: Ihsan Yılmaz.',
+    demo: '– Planungsbüro Tanju Kaya’nın yeni web sitesi, hazırlık aşamasında.',
+    nPartners: 'Ortaklar',
+    hPartners: 'Ortaklar', cPartners: 'Birlikte çalıştığımız firmalar',
+    p1: 'Mutfaklar', p2: 'Mağaza donanımı', p3: 'Banyo donanımı',
+    f5: 'Hizmet aşamaları', f5v: 'Ön tasarım, uygulama projesi, ihale, şantiye denetimi',
+    f6: 'Referanslar', f6v: 'Potsdamer Platz Arkaden, Alexa Berlin, Ringcenter Berlin, Schlossparkcenter Schwerin',
     nProjects: 'Projeler', nOffice: 'Büro', nContact: 'İletişim',
     heroLine: 'Mimarlık · Mağaza · Fuar · Endüstriyel yapı · Restorasyon · Ürün tasarımı',
     t1: 'Projeler', t2: 'Büro', t3: 'İletişim',
@@ -81,7 +88,7 @@
     fName: 'Ad', fMail: 'E-posta', fTopic: 'Konu', fMsg: 'Mesaj', fSend: 'Gönder',
     o1: 'Mimarlık / yeni yapı', o2: 'Mağaza tasarımı', o3: 'Fuar standı', o4: 'Endüstriyel yapı', o5: 'Restorasyon', o6: 'Ürün & mobilya tasarımı', o7: 'Diğer',
     fnote: 'Taslakta buton hazır doldurulmuş bir e-posta açar. Yayında talep doğrudan gönderilir.',
-    ftTel: 'Telefon', ftMail: 'E-posta', ftImp: 'Künye', ftDs: 'Gizlilik', ftKon: 'İletişim', ftDemo: 'Taslak · Ihsan Yılmaz'
+    ftTel: 'Telefon', ftMail: 'E-posta', ftImp: 'Künye', ftDs: 'Gizlilik', ftKon: 'İletişim', ftDemo: 'Web sitesi: Ihsan Yılmaz'
   };
   var DE = {};
   document.querySelectorAll('[data-i]').forEach(function (el) { DE[el.dataset.i] = el.innerHTML; });

@@ -131,3 +131,16 @@ textarea{resize:vertical;min-height:110px}
 .rv{opacity:0;transform:translateY(18px);transition:opacity .9s,transform .9s cubic-bezier(.22,.61,.36,1)}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* Referenzzeile, Porträt, Assoziierte */
+.refline{margin:-8px 0 22px;font-size:.84rem;color:var(--mute);letter-spacing:.02em}
+.refline[hidden]{display:none}
+.portrait{width:min(100%,360px);height:auto;margin-bottom:30px;filter:grayscale(1);transition:filter .6s}
+.portrait:hover{filter:none}
+.partners{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+@media(max-width:700px){.partners{grid-template-columns:1fr}}
+.partners>*{display:block;padding:34px 28px;border:1px solid var(--line);transition:border-color .25s,background .25s}
+.partners>*>span{display:block;margin-top:6px;font-family:var(--h);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--faint)}
+.partners a:hover{border-color:#fff;background:#0a0a0a}
+.partners b{display:block;font-family:var(--h);font-weight:300;font-size:1.5rem;letter-spacing:.06em}
+
