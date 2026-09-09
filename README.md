@@ -4,13 +4,15 @@ Neue Website für das **Planungsbüro Tanju Kaya**, Coburg — in Arbeit. Erstel
 
 **Live-Vorschau:** https://t-kaya-demo.pages.dev/ (Cloudflare Pages, Projekt `t-kaya-demo`)
 
-Eine Seite, dunkel. Im Kopfbereich läuft eine Diashow aus den stärksten
-Projektfotos über den ganzen Bildschirm, darunter Leistungen, Galerie mit
-Kategoriefilter und Lightbox, International, Bürovorstellung, Kontakt.
+Zwei Varianten, umschaltbar oben rechts:
 
-Die Entwürfe 2 (editorial) und 3 (Fototeppich) sind verworfen. `/v2` und `/v3`
-leiten auf die Startseite um, damit geteilte Links nicht ins Leere laufen.
-Beide liegen vollständig in der Git-Historie, falls doch etwas davon gebraucht wird.
+| | Datei | Idee |
+|---|---|---|
+| **Variante 1** | `index.html` | Dunkel. Im Kopfbereich eine Diashow über den ganzen Bildschirm, danach Projekte, Leistungen, International, Büro, Kontakt |
+| **Variante 2** | `v2.html` | Hell und editorial. Warmes Off-White, Instrument Serif, Vollbild-Auftakt, Bildreihen mit gemischten Breiten, je Kategorie ein Block mit großem Leitbild |
+
+Der Entwurf 3 (Fototeppich) ist verworfen; `/v3` leitet auf die Startseite um.
+Er liegt vollständig in der Git-Historie.
 
 ---
 
@@ -32,13 +34,20 @@ Die Seite ist bewusst auf `noindex` gesetzt, damit der Entwurf nicht bei Google 
 ## Aufbau
 
 ```
-index.html             die Website
+index.html             Variante 1 (dunkel, mit Diashow)
+v2.html                Variante 2 (hell, editorial)
 404.html               Fehlerseite
-assets/css/v1.css      Stil
-assets/js/v1.js        Galerie, Lightbox, Sprachumschaltung DE/TR, Formular
-assets/js/dia.js       Diashow im Kopfbereich
-assets/js/reihen.js    füllt die letzte Zeile des Bildrasters auf
+assets/css/v1.css      Stil Variante 1
+assets/css/v2.css      Stil Variante 2
+assets/css/gemeinsam.css  Lightbox, Einblenden, Fokus – von Variante 2 genutzt
+assets/js/v1.js        Galerie, Lightbox, Sprachumschaltung Variante 1
+assets/js/v2.js        Bildreihen und Werkschau Variante 2
+assets/js/gemeinsam.js Bausteine für Variante 2
+assets/js/tr.js        türkische Fassung für Variante 2
+assets/js/dia.js       Diashow im Kopfbereich von Variante 1
+assets/js/reihen.js    füllt die letzte Zeile eines Bildrasters auf
 assets/js/bilder.js    Bilddaten der Galerie (aus katalog.json erzeugt)
+assets/js/switch.js    Varianten-Umschalter
 assets/img/k/          44 Projektbilder in zwei Größen + katalog.json
 assets/img/p/          vier Restbilder von der alten Website
 assets/img/portrait.jpg  Porträt Tanju Kaya
@@ -47,7 +56,7 @@ assets/og.png          Vorschaubild für WhatsApp / LinkedIn / Google
 upload.html            Upload-Seite für den Kunden
 functions/api/         Pages Functions: upload, uploads, datei
 hole-bilder.sh         holt die Uploads auf den Rechner
-_redirects             /v2 und /v3 → /
+_redirects             /v3 → /
 ```
 
 Keine Build-Tools. Lokal ansehen und deployen:
