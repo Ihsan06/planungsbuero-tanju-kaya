@@ -18,13 +18,13 @@
   // Zum Ändern einfach die Dateinamen tauschen; sie stehen in
   // assets/img/k/katalog.json im Feld "f".
   var GEWUENSCHT = [
-    'produktion-spritzguss',
     'optikerfachgeschaft',
     'lager-und-kommissionierung',
     'empfang-gaudlitz-entwurf',
     'gewerbehof',
     'montage-mit-autokran',
-    'leichtbauhalle-innenraum'
+    'leichtbauhalle-innenraum',
+    'produktion-spritzguss'
   ];
   var nachName = {};
   TK_BILDER.forEach(function (b) { nachName[b.f] = b; });
