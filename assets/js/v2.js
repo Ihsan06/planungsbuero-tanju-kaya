@@ -15,8 +15,6 @@
     ctaProjects: 'Projeleri gör', ctaContact: 'Teklif isteyin',
 
     servEyebrow: 'Hizmetler',
-    servTitle: 'Tek büro. Bütün süreç.',
-    servLead: 'Tasarım, ruhsat projesi, uygulama ve şantiye yönetimi – hepsi tek elden. Yatırımcılar, mağazalar, sanayi ve özel müşteriler için.',
     s1t: 'Mimarlık & iç mimarlık', s1d: 'Konutlar, villalar ve iç mekânlar – tasarımdan ruhsata ve uygulama projesine kadar.',
     s2t: 'Mağaza tasarımı',        s2d: 'Satan satış alanları – Potsdamer Platz Arkaden, Alexa ve Ringcenter Berlin, Schlossparkcenter Schwerin gibi.',
     s3t: 'Fuar standı',            s3d: 'Akılda kalan fuar standları – Frankfurt, Münih, Köln, Berlin, Düsseldorf, Hannover, Milano, Madrid ve Paris fuarlarında.',
@@ -27,8 +25,6 @@
     s8t: 'Mobilya tasarımı',       s8d: 'Tek parça ve seri mobilya, atölye ve endüstriyel üretim için detaylandırılmış.',
 
     projEyebrow: 'Projeler',
-    projTitle: 'Görülmeye değer referanslar.',
-    projLead: 'Büronun arşivinden temalara göre bir kesit – üretim halinden karşılama alanına. Büyük görmek için fotoğrafa tıklayın.',
 
     intlEyebrow: 'Uluslararası',
     intlTitle: 'Coburg’da planlandı. Altı ülkede inşa edildi.',

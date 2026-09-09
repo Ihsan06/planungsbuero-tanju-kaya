@@ -208,6 +208,10 @@ section{position:relative}
 .sec{padding-block:var(--sec-y)}
 .sec-alt{background:var(--bg-2)}
 .sec-head{max-width:66ch;margin-bottom:clamp(26px,3.4vw,44px)}
+/* Bei Projekten und Leistungen traegt der Kopf nur noch die kleine Marke.
+   Ohne Ueberschrift darf der Abstand darueber und darunter kleiner sein. */
+#projekte,#leistungen{padding-top:clamp(34px,4vw,62px)}
+#projekte .sec-head,#leistungen .sec-head{margin-bottom:clamp(14px,1.6vw,22px)}
 .sec-head h2{margin-top:14px}
 .sec-head .lead{margin-top:16px}
 
