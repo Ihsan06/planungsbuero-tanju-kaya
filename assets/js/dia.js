@@ -18,9 +18,9 @@
   // Zum Ändern einfach die Dateinamen tauschen; sie stehen in
   // assets/img/k/katalog.json im Feld "f".
   var GEWUENSCHT = [
+    'empfang-gaudlitz-entwurf',   // gleicher Auftakt wie im Kopfbereich von Variante 2
     'optikerfachgeschaft',
     'lager-und-kommissionierung',
-    'empfang-gaudlitz-entwurf',
     'gewerbehof',
     'montage-mit-autokran',
     'leichtbauhalle-innenraum',
