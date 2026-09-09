@@ -30,10 +30,6 @@
           <span class="proj-tag" data-tag>${p.tag.de}</span>
           <img src="assets/img/${p.img}" alt="" loading="lazy">
         </div>
-        <div class="proj-body">
-          <h3 data-t>${p.t.de}</h3>
-          <span data-m>${p.m.de}</span>
-        </div>
       </a>`).join('');
   }
 
@@ -107,9 +103,8 @@
     });
     document.querySelectorAll('.proj').forEach((el, i) => {
       const p = PROJECTS[i]; if (!p) return;
-      el.querySelector('[data-tag]').textContent = p.tag[lang] || p.tag.de;
-      el.querySelector('[data-t]').textContent = p.t[lang] || p.t.de;
-      el.querySelector('[data-m]').textContent = p.m[lang] || p.m.de;
+      var kennung = el.querySelector('[data-tag]');
+      if (kennung) kennung.textContent = p.tag[lang] || p.tag.de;
     });
     document.documentElement.lang = lang;
     document.querySelectorAll('.lang button').forEach(b =>
