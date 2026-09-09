@@ -29,13 +29,15 @@ Die Seite ist bewusst auf `noindex` gesetzt, damit der Entwurf nicht bei Google 
 
 ```
 index.html             die Website
+404.html               Fehlerseite
 assets/css/v2.css      Stil
-assets/js/v2.js        Sprachumschaltung DE/TR, Projektkacheln, Parallax, Formular
-assets/img/hero.jpg    Hero-Foto (fixierter Hintergrund)
-assets/img/intl.jpg    Hintergrund Abschnitt International
+assets/js/v2.js        Sprachumschaltung DE/TR, Galerie, Lightbox, Formular
+assets/js/bilder.js    Bilddaten der Galerie (aus katalog.json erzeugt)
+assets/img/k/          44 Projektbilder in zwei Größen + katalog.json
+assets/img/p/          vier Restbilder von der alten Website
+assets/img/hero.jpg    Hero (Gaudlitz, Dämmerung)
+assets/img/intl.jpg    Hintergrund Abschnitt International (Stockfoto)
 assets/img/portrait.jpg  Porträt Tanju Kaya
-assets/img/p/          Fotoarchiv von der alten Website (88 Dateien, davon nutzt
-                       die Seite aktuell 12 – der Rest wartet auf die Projektseiten)
 assets/og.png          Vorschaubild für WhatsApp / LinkedIn / Google
 upload.html            Upload-Seite für den Kunden
 functions/api/         Pages Functions: upload, uploads, datei
@@ -50,25 +52,33 @@ npm run dev
 npm run deploy
 ```
 
-## Bilder Variante 2
+## Bilder
 
-Zwei Stockfotos von Unsplash (Unsplash-Lizenz: kommerziell frei, keine Namensnennung nötig):
+Seit dem 09.09.2026 stammen die Projektbilder aus dem Bestand des Büros (drei ZIP-Archive
+von Tanju Kaya: Architektur, Industriebau, Innenarchitektur). Aufbereitet liegen sie in
+`assets/img/k/`, je Motiv in zwei Größen: `<name>.jpg` mit 1600 px für die Lightbox,
+`<name>-k.jpg` mit 900 px für die Kacheln.
 
-| Datei | Motiv | Wo |
-|---|---|---|
-| `assets/img/hero.jpg` | Ladenbau-Innenraum mit Holzlamellen | Hero |
-| `assets/img/intl.jpg` | Skyline in der Dämmerung | Abschnitt *International* |
+`assets/img/k/katalog.json` ist die Quelle der Wahrheit mit den Metadaten je Bild:
 
-Die acht Leistungskacheln in Variante 2 liegen dagegen auf **eigenen Projektfotos**
-(`--sbg` je Kachel im HTML). Achtung: `url()` in einer Custom Property wird relativ zum
-Stylesheet aufgelöst, nicht zum HTML – die Pfade müssen deshalb mit `/assets/…` beginnen.
+| Feld | Bedeutung |
+|---|---|
+| `kat` | Kategorie auf der Seite (industriebau, innenausbau, ladenbau, wohnungsbau, altbau, rohbau) |
+| `art` | aussen, innen, detail oder render |
+| `stern` | 1–3, Eignung; 3 = titelbildtauglich, steuert die Sortierung |
+| `kunde`, `ort`, `jahr` | soweit erkennbar, Jahr aus den EXIF-Daten |
+| `held` | Kandidat für den Hero |
 
-Beide liegen als fixierter Hintergrund (`background-attachment: fixed`) hinter dem Inhalt,
-also dieselbe Technik wie auf autohaus-diezmann.de; unter 900 px Breite fällt es auf
-`scroll` zurück, weil iOS mit `fixed` ruckelt.
+`assets/js/bilder.js` wird daraus erzeugt und von der Seite geladen. Ändert sich der
+Katalog, muss `bilder.js` neu geschrieben werden.
 
-**Sobald eigene Fotos da sind, ersetzen.** Weitere Kandidaten liegen in
-`Desktop/Kaja-Notizen/bildvarianten.png` und `international-bg.png`.
+Der Hero zeigt das Verwaltungsgebäude Gaudlitz in der Dämmerung, ein echtes Projekt.
+Nur noch drei Stellen laufen auf Fremd- oder Altmaterial: der Hintergrund des Abschnitts
+*International* (Stockfoto, weil keine Auslandsfotos vorliegen) sowie die Leistungskacheln
+Messebau, Denkmalpflege, Produkt- und Möbeldesign (alte Website, niedrig aufgelöst).
+
+Rohdaten und ausgemustertes Material liegen außerhalb des Repos:
+`Desktop/Kaja-Rohbilder` (Originale und ZIPs) und `Desktop/Kaja-Notizen/altbestand-bilder`.
 
 ## Akzentfarbe
 

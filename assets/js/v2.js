@@ -3,31 +3,97 @@
   "use strict";
 
   /* ---------------------------------------------------------
-     1. Projektkacheln (Fotos von der bisherigen Website)
+     1. Projektgalerie mit Filter und Lightbox
      --------------------------------------------------------- */
-  const PROJECTS = [
-    { img: 'wohnhaus-02.jpg',        tag: { de: 'Architektur',     tr: 'Mimarlık' },         t: { de: 'Villen & Wohnhäuser',        tr: 'Villalar & Konutlar' },       m: { de: 'Entwurf bis Ausführung', tr: 'Tasarımdan uygulamaya' } },
-    { img: 'okado-002.jpg',          tag: { de: 'Ladenbau',        tr: 'Mağaza tasarımı' },  t: { de: 'Verkaufsflächen & Filialen', tr: 'Satış alanları & şubeler' },  m: { de: 'Innenausbau',            tr: 'İç yapım' } },
-    { img: 'lossaustr3a.jpg',        tag: { de: 'Altbausanierung', tr: 'Restorasyon' },      t: { de: 'Sanierung & Denkmalpflege',  tr: 'Restorasyon & koruma' },      m: { de: 'Coburg',                 tr: 'Coburg' } },
-    { img: 'walkmuehlgasse.jpg',     tag: { de: 'Wohnungsbau',     tr: 'Konut yapımı' },     t: { de: 'Mehrfamilienhäuser',         tr: 'Çok aileli konutlar' },       m: { de: 'Neubau',                 tr: 'Yeni yapı' } },
-    { img: 'kapp-05.jpg',            tag: { de: 'Messebau',        tr: 'Fuar standı' },      t: { de: 'Messestände & Displays',     tr: 'Fuar standları & teşhir' },   m: { de: 'Temporär',               tr: 'Geçici' } },
-    { img: 'produktdesign-06.jpg',   tag: { de: 'Produktdesign',   tr: 'Ürün tasarımı' },    t: { de: 'Möbel bis zur Serienreife',  tr: 'Seri üretime kadar mobilya' },m: { de: 'Design',                 tr: 'Tasarım' } }
-  ];
+  const BILDER = window.TK_BILDER || [];
+  const KATS = window.TK_KATS || {};
+  const ANFANG = 12;
+  let kat = 'alle', alleZeigen = false, sprache = 'de';
 
-  const grid = document.getElementById('projGrid');
-  if (grid) {
-    grid.innerHTML = PROJECTS.map(p => `
-      <a class="proj" href="#kontakt">
-        <div class="proj-art">
-          <span class="proj-tag" data-tag>${p.tag.de}</span>
-          <img src="assets/img/p/${p.img}" alt="" loading="lazy">
-        </div>
-        <div class="proj-body">
-          <h3 data-t>${p.t.de}</h3>
-          <span data-m>${p.m.de}</span>
-        </div>
-      </a>`).join('');
+  const filter = document.getElementById('filter');
+  const galerie = document.getElementById('galerie');
+  const mehr = document.getElementById('mehr');
+  const lb = document.getElementById('lb');
+  const lbImg = lb.querySelector('img');
+  const lbTitel = lb.querySelector('figcaption b');
+  const lbInfo = lb.querySelector('figcaption span');
+  let sichtbar = [], aktuell = -1;
+
+  const katName = (k) => (KATS[k] || [k, k])[sprache === 'tr' ? 1 : 0];
+  const zusatz = (b) => [b.kunde, b.jahr].filter(Boolean).join(' · ');
+
+  // Vorhandene Kategorien in fester Reihenfolge, aber nur die, zu denen es Bilder gibt.
+  const REIHE = ['industriebau', 'innenausbau', 'ladenbau', 'wohnungsbau', 'altbau', 'rohbau'];
+  const vorhanden = REIHE.filter((k) => BILDER.some((b) => b.kat === k));
+
+  function knoepfe() {
+    filter.innerHTML = '<button class="an" data-k="alle"></button>' +
+      vorhanden.map((k) => `<button data-k="${k}"></button>`).join('');
+    beschriften();
   }
+  function beschriften() {
+    filter.querySelectorAll('button').forEach((b) => {
+      b.textContent = b.dataset.k === 'alle' ? (sprache === 'tr' ? 'Tümü' : 'Alle') : katName(b.dataset.k);
+    });
+  }
+
+  function zeichnen() {
+    const liste = BILDER.filter((b) => kat === 'alle' || b.kat === kat)
+      .sort((a, b) => b.stern - a.stern || String(b.jahr).localeCompare(String(a.jahr)));
+    const grenze = (kat === 'alle' && !alleZeigen) ? ANFANG : liste.length;
+    sichtbar = liste.slice(0, grenze);
+    galerie.innerHTML = sichtbar.map((b, i) => `
+      <figure class="bild" data-i="${i}" tabindex="0" role="button" aria-label="${b.t}">
+        <img src="assets/img/k/${b.f}-k.jpg" alt="${b.t}" width="${b.w}" height="${b.h}"
+             loading="${i < 6 ? 'eager' : 'lazy'}" decoding="async">
+        <figcaption><b>${b.t}</b><span>${[katName(b.kat), zusatz(b)].filter(Boolean).join(' · ')}</span></figcaption>
+      </figure>`).join('');
+    galerie.querySelectorAll('img').forEach((im) => {
+      if (im.complete) im.classList.add('da');
+      else im.addEventListener('load', () => im.classList.add('da'), { once: true });
+    });
+    mehr.hidden = !(kat === 'alle' && !alleZeigen && liste.length > ANFANG);
+  }
+
+  filter.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    filter.querySelectorAll('button').forEach((x) => x.classList.toggle('an', x === b));
+    kat = b.dataset.k; zeichnen();
+  });
+  mehr.querySelector('button').addEventListener('click', () => { alleZeigen = true; zeichnen(); });
+
+  function oeffnen(i) {
+    if (!sichtbar.length) return;
+    aktuell = (i + sichtbar.length) % sichtbar.length;
+    const b = sichtbar[aktuell];
+    lbImg.src = `assets/img/k/${b.f}.jpg`;
+    lbImg.alt = b.t;
+    lbTitel.textContent = b.t;
+    lbInfo.textContent = [katName(b.kat), zusatz(b)].filter(Boolean).join(' · ');
+    lb.classList.add('auf');
+    document.body.style.overflow = 'hidden';
+  }
+  function schliessen() { lb.classList.remove('auf'); document.body.style.overflow = ''; }
+
+  galerie.addEventListener('click', (e) => {
+    const f = e.target.closest('.bild'); if (f) oeffnen(+f.dataset.i);
+  });
+  galerie.addEventListener('keydown', (e) => {
+    const f = e.target.closest('.bild');
+    if (f && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); oeffnen(+f.dataset.i); }
+  });
+  lb.querySelector('.lb-x').addEventListener('click', schliessen);
+  lb.querySelector('.lb-pv').addEventListener('click', () => oeffnen(aktuell - 1));
+  lb.querySelector('.lb-nx').addEventListener('click', () => oeffnen(aktuell + 1));
+  lb.addEventListener('click', (e) => { if (e.target === lb) schliessen(); });
+  document.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('auf')) return;
+    if (e.key === 'Escape') schliessen();
+    if (e.key === 'ArrowLeft') oeffnen(aktuell - 1);
+    if (e.key === 'ArrowRight') oeffnen(aktuell + 1);
+  });
+
+  knoepfe();
 
   /* ---------------------------------------------------------
      2. Sprachumschaltung DE / TR
@@ -57,7 +123,8 @@
 
     projEyebrow: 'Projeler',
     projTitle: 'Görülmeye değer referanslar.',
-    projLead: 'Her kategori kendi sayfasını alır: fotoğraflar, kısa açıklama, yer ve yıl – müşterinin de Google’ın da aradığı tam olarak bu.',
+    projLead: 'Arşivden bir kesit: endüstriyel yapı, iç yapım, konut ve mağaza tasarımı. Büyütmek için tıklayın.',
+    mehrBtn: 'Tüm projeleri göster',
 
     intlEyebrow: 'Uluslararası',
     intlTitle: 'Coburg’da planlandı. Altı ülkede inşa edildi.',
@@ -99,12 +166,9 @@
     document.querySelectorAll('[data-i18n-html]').forEach(el => {
       const v = dict[el.dataset.i18nHtml]; if (v != null) el.innerHTML = v;
     });
-    document.querySelectorAll('.proj').forEach((el, i) => {
-      const p = PROJECTS[i]; if (!p) return;
-      el.querySelector('[data-tag]').textContent = p.tag[lang] || p.tag.de;
-      el.querySelector('[data-t]').textContent = p.t[lang] || p.t.de;
-      el.querySelector('[data-m]').textContent = p.m[lang] || p.m.de;
-    });
+    sprache = lang;
+    beschriften();
+    zeichnen();
     document.documentElement.lang = lang;
     document.querySelectorAll('.lang button').forEach(b =>
       b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
@@ -123,7 +187,7 @@
       start = 'tr';
     }
   } catch (e) {}
-  if (start !== 'de') setLang(start);
+  setLang(start);   // immer: setLang zeichnet auch die Galerie
 
   /* ---------------------------------------------------------
      3. Navigation, Sticky-Header, Reveal

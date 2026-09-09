@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/v2.css?v=16">
+<link rel="stylesheet" href="assets/css/v2.css?v=17">
 
 <script type="application/ld+json">
 {
@@ -115,12 +115,12 @@
     </div>
 
     <div class="grid-serv rv">
-      <article class="serv" style="--sbg:url('/assets/img/p/architektur-06.jpg')">
+      <article class="serv" style="--sbg:url('/assets/img/k/neubau-neben-grunderzeitfassade-k.jpg')">
         <div class="num">01</div>
         <h3 data-i18n="s1t">Architektur &amp; Innenarchitektur</h3>
         <p data-i18n="s1d">Wohnhäuser, Villen und Innenräume – vom Entwurf über die Genehmigung bis zur Ausführungsplanung.</p>
       </article>
-      <article class="serv" style="--sbg:url('/assets/img/p/okado-002.jpg')">
+      <article class="serv" style="--sbg:url('/assets/img/k/optikerfachgeschaft-k.jpg')">
         <div class="num">02</div>
         <h3 data-i18n="s2t">Ladenbau</h3>
         <p data-i18n="s2d">Verkaufsflächen, die verkaufen – u. a. in den Potsdamer Platz Arkaden, im Alexa und Ringcenter Berlin und im Schlossparkcenter Schwerin.</p>
@@ -130,12 +130,12 @@
         <h3 data-i18n="s3t">Messebau</h3>
         <p data-i18n="s3d">Messestände mit Wiedererkennungswert – auf den führenden Messen in Frankfurt, München, Köln, Berlin, Düsseldorf, Hannover, Mailand, Madrid und Paris.</p>
       </article>
-      <article class="serv" style="--sbg:url('/assets/img/p/schnitt-werkshalle-02.jpg');--sfit:88% auto">
+      <article class="serv" style="--sbg:url('/assets/img/k/halle-mit-kranbahn-k.jpg')">
         <div class="num">04</div>
         <h3 data-i18n="s4t">Industriebau</h3>
         <p data-i18n="s4d">Hallen, Produktions- und Betriebsgebäude. Funktional geplant, wirtschaftlich gebaut.</p>
       </article>
-      <article class="serv" style="--sbg:url('/assets/img/p/lossaustr3a-01.jpg')">
+      <article class="serv" style="--sbg:url('/assets/img/k/wohn-und-geschaftshaus-straenzug-k.jpg')">
         <div class="num">05</div>
         <h3 data-i18n="s5t">Altbausanierung</h3>
         <p data-i18n="s5d">Bestand erhalten und weiterbauen – energetisch, konstruktiv und gestalterisch.</p>
@@ -165,11 +165,14 @@
     <div class="sec-head rv">
       <span class="eyebrow" data-i18n="projEyebrow">Projekte</span>
       <h2 class="h-lg" data-i18n="projTitle">Referenzen, die man sehen sollte.</h2>
-      <p class="lead" data-i18n="projLead">Jede Kategorie bekommt eine eigene Seite mit Fotos, Kurzbeschreibung, Ort und Jahr – genau das, wonach Auftraggeber und Google suchen.</p>
+      <p class="lead" data-i18n="projLead">Ein Querschnitt aus dem Bestand: Industriebau, Innenausbau, Wohnungsbau und Ladenbau. Zum Vergrößern anklicken.</p>
     </div>
 
-    <div class="grid-proj rv" id="projGrid"></div>
-
+    <div class="filter rv" id="filter"></div>
+    <div class="galerie rv" id="galerie"></div>
+    <div class="mehr" id="mehr" hidden>
+      <button class="btn btn-ghost" type="button" data-i18n="mehrBtn">Alle Projekte zeigen</button>
+    </div>
   </div>
 </section>
 
@@ -332,6 +335,17 @@
   </div>
 </footer>
 
-<script src="assets/js/v2.js?v=16"></script>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Projektansicht">
+  <button class="lb-x" type="button" aria-label="Schließen">&times;</button>
+  <button class="lb-pv" type="button" aria-label="Vorheriges Bild">&lsaquo;</button>
+  <figure>
+    <img alt="">
+    <figcaption><b></b><span></span></figcaption>
+  </figure>
+  <button class="lb-nx" type="button" aria-label="Nächstes Bild">&rsaquo;</button>
+</div>
+
+<script src="assets/js/bilder.js?v=17"></script>
+<script src="assets/js/v2.js?v=17"></script>
 </body>
 </html>
