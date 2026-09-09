@@ -3,38 +3,7 @@
   "use strict";
 
   /* ---------------------------------------------------------
-     1. Projektkacheln (Fotos von der bisherigen Website)
-     --------------------------------------------------------- */
-  // Zwoelf Referenzen. Die ersten sechs liegen im Altbestand (assets/img/p),
-  // die weiteren im aufbereiteten Katalog (assets/img/k, Endung -k = 900 px).
-  const PROJECTS = [
-    { img: 'p/wohnhaus-02.jpg',                          tag: { de: 'Architektur',     tr: 'Mimarlık' },          t: { de: 'Villen & Wohnhäuser',        tr: 'Villalar & Konutlar' },        m: { de: 'Entwurf bis Ausführung', tr: 'Tasarımdan uygulamaya' } },
-    { img: 'p/okado-002.jpg',                            tag: { de: 'Ladenbau',        tr: 'Mağaza tasarımı' },   t: { de: 'Verkaufsflächen & Filialen', tr: 'Satış alanları & şubeler' },   m: { de: 'Innenausbau',            tr: 'İç yapım' } },
-    { img: 'p/lossaustr3a.jpg',                          tag: { de: 'Altbausanierung', tr: 'Restorasyon' },       t: { de: 'Sanierung & Denkmalpflege',  tr: 'Restorasyon & koruma' },       m: { de: 'Coburg',                 tr: 'Coburg' } },
-    { img: 'p/walkmuehlgasse.jpg',                       tag: { de: 'Wohnungsbau',     tr: 'Konut yapımı' },      t: { de: 'Mehrfamilienhäuser',         tr: 'Çok aileli konutlar' },        m: { de: 'Neubau',                 tr: 'Yeni yapı' } },
-    { img: 'p/kapp-05.jpg',                              tag: { de: 'Messebau',        tr: 'Fuar standı' },       t: { de: 'Messestände & Displays',     tr: 'Fuar standları & teşhir' },    m: { de: 'Temporär',               tr: 'Geçici' } },
-    { img: 'p/produktdesign-06.jpg',                     tag: { de: 'Produktdesign',   tr: 'Ürün tasarımı' },     t: { de: 'Möbel bis zur Serienreife',  tr: 'Seri üretime kadar mobilya' }, m: { de: 'Design',                 tr: 'Tasarım' } },
-    { img: 'k/produktion-spritzguss-k.jpg',              tag: { de: 'Industriebau',    tr: 'Endüstriyel yapı' },  t: { de: 'Produktion & Fertigung',     tr: 'Üretim & imalat' },            m: { de: '2025',                   tr: '2025' } },
-    { img: 'k/empfang-gaudlitz-umgesetzt-k.jpg',         tag: { de: 'Innenausbau',     tr: 'İç yapım' },          t: { de: 'Empfang & Foyer',            tr: 'Karşılama & fuaye' },          m: { de: 'Gaudlitz · 2024',        tr: 'Gaudlitz · 2024' } },
-    { img: 'k/optikerfachgeschaft-k.jpg',                tag: { de: 'Ladenbau',        tr: 'Mağaza tasarımı' },   t: { de: 'Fachgeschäft & Beratung',    tr: 'Mağaza & danışmanlık' },       m: { de: '2021',                   tr: '2021' } },
-    { img: 'k/verwaltungsgebaude-gaudlitz-dammerung-k.jpg', tag: { de: 'Industriebau', tr: 'Endüstriyel yapı' },  t: { de: 'Verwaltungsgebäude',         tr: 'Yönetim binası' },             m: { de: 'Gaudlitz · 2024',        tr: 'Gaudlitz · 2024' } },
-    { img: 'k/stahlbau-deckenkonstruktion-k.jpg',        tag: { de: 'Rohbau',          tr: 'Kaba yapı' },         t: { de: 'Tragwerk & Konstruktion',    tr: 'Taşıyıcı sistem' },            m: { de: 'Stahlbau',               tr: 'Çelik yapı' } },
-    { img: 'k/groraumburo-k.jpg',                        tag: { de: 'Innenausbau',     tr: 'İç yapım' },          t: { de: 'Büro & Arbeitswelten',       tr: 'Ofis & çalışma alanları' },    m: { de: '2018',                   tr: '2018' } }
-  ];
-
-  const grid = document.getElementById('projGrid');
-  if (grid) {
-    grid.innerHTML = PROJECTS.map(p => `
-      <a class="proj" href="#kontakt">
-        <div class="proj-art">
-          <span class="proj-tag" data-tag>${p.tag.de}</span>
-          <img src="assets/img/${p.img}" alt="" loading="lazy">
-        </div>
-      </a>`).join('');
-  }
-
-  /* ---------------------------------------------------------
-     2. Sprachumschaltung DE / TR
+     1. Sprachumschaltung DE / TR
      --------------------------------------------------------- */
   const TR = {
     q5t: 'Hizmet aşamaları', q5d: 'Ön tasarım, uygulama projesi, ihale, şantiye denetimi',
@@ -59,7 +28,7 @@
 
     projEyebrow: 'Projeler',
     projTitle: 'Görülmeye değer referanslar.',
-    projLead: 'Her kategori kendi sayfasını alır: fotoğraflar, kısa açıklama, yer ve yıl – müşterinin de Google’ın da aradığı tam olarak bu.',
+    projLead: 'Büronun arşivinden temalara göre bir kesit – üretim halinden karşılama alanına. Büyük görmek için fotoğrafa tıklayın.',
 
     intlEyebrow: 'Uluslararası',
     intlTitle: 'Coburg’da planlandı. Altı ülkede inşa edildi.',
@@ -101,15 +70,12 @@
     document.querySelectorAll('[data-i18n-html]').forEach(el => {
       const v = dict[el.dataset.i18nHtml]; if (v != null) el.innerHTML = v;
     });
-    document.querySelectorAll('.proj').forEach((el, i) => {
-      const p = PROJECTS[i]; if (!p) return;
-      var kennung = el.querySelector('[data-tag]');
-      if (kennung) kennung.textContent = p.tag[lang] || p.tag.de;
-    });
     document.documentElement.lang = lang;
     document.querySelectorAll('.lang button').forEach(b =>
       b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     try { localStorage.setItem('tk-lang', lang); } catch (e) {}
+    // Das Themenmosaik beschriftet sich daraufhin selbst neu.
+    window.dispatchEvent(new CustomEvent('tk-lang', { detail: lang }));
   }
 
   document.querySelectorAll('.lang button').forEach(b =>

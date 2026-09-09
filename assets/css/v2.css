@@ -238,29 +238,74 @@ section{position:relative}
 @media (max-width:1000px){.grid-serv{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.grid-serv{grid-template-columns:1fr}}
 
-/* projekte */
-.grid-proj{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.1vw,18px)}
-@media (max-width:1400px){.grid-proj{grid-template-columns:repeat(3,1fr)}}
-@media (max-width:960px){.grid-proj{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:560px){.grid-proj{grid-template-columns:1fr}}
+/* projekte - Themenmosaik */
+#mosaik{display:flex;flex-direction:column;gap:clamp(48px,5.4vw,86px)}
 
-.proj{
-  position:relative;display:block;text-decoration:none;overflow:hidden;
-  background:var(--bg-3);
-  transition:transform .5s var(--ease)
+/* Kopfzeile eines Themenbandes: Nummer, Titel, Anzahl, darunter eine Haarlinie */
+.band-kopf{
+  display:flex;align-items:baseline;gap:clamp(14px,1.6vw,26px);
+  padding-bottom:14px;margin-bottom:clamp(14px,1.5vw,22px);
+  border-bottom:1px solid var(--line)
 }
-.proj:hover{transform:translateY(-4px)}
-.proj-art{position:relative;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(150deg,#191920,#0e0e11)}
-.proj-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease),filter .5s}
-.proj-art img{filter:saturate(.85)}
-.proj:hover .proj-art img{transform:scale(1.045);filter:saturate(1)}
-.proj-tag{
-  position:absolute;left:14px;top:14px;z-index:2;
-  font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
-  background:rgba(11,11,12,.72);border:1px solid var(--line);
-  padding:5px 11px;color:var(--fg-dim);
-  backdrop-filter:blur(6px)
+.band-nr{
+  font-size:.62rem;letter-spacing:.24em;color:var(--accent);
+  font-variant-numeric:tabular-nums
 }
+.band-titel{
+  margin:0;font-weight:300;letter-spacing:-.015em;
+  font-size:clamp(1.15rem,1.9vw,1.72rem);color:var(--fg)
+}
+.band-zahl{
+  margin-left:auto;flex:none;
+  font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-faint)
+}
+@media (max-width:560px){
+  .band-kopf{flex-wrap:wrap;gap:8px 14px}
+  .band-zahl{margin-left:0;width:100%}
+}
+
+/* Die Reihen. Hoehe setzt mosaik.js, die Breite der einzelnen Kachel ergibt
+   sich aus flex-grow = Seitenverhaeltnis. So fuellt jede Reihe exakt aus. */
+.mosaik-reihen{display:flex;flex-direction:column;gap:clamp(8px,.8vw,14px)}
+.mosaik-reihe{display:flex;gap:clamp(8px,.8vw,14px)}
+.mk{
+  position:relative;margin:0;min-width:0;overflow:hidden;cursor:zoom-in;
+  background:linear-gradient(150deg,#191920,#0e0e11)
+}
+.mk img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:saturate(.88);
+  transition:transform .8s var(--ease),filter .5s var(--ease)
+}
+.mk::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+  opacity:0;transition:opacity .4s var(--ease)
+}
+.mk:hover img,.mk:focus-visible img{transform:scale(1.045);filter:saturate(1.04)}
+.mk:hover::after,.mk:focus-visible::after{opacity:1}
+.mk:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){
+  .mk img{transition:none}
+  .mk:hover img{transform:none}
+}
+
+/* Grossansicht */
+.lb{position:fixed;inset:0;z-index:400;background:rgba(8,8,9,.97);display:none;
+  align-items:center;justify-content:center;padding:20px}
+.lb.auf{display:flex}
+.lb figure{margin:0;max-width:min(94vw,1400px);text-align:center}
+.lb img{max-width:100%;max-height:78vh;object-fit:contain}
+.lb figcaption{margin-top:16px}
+.lb figcaption b{display:block;font-size:1.05rem;font-weight:300;letter-spacing:-.01em}
+.lb figcaption span{display:block;margin-top:5px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-faint)}
+.lb button{position:absolute;background:none;border:0;color:var(--fg);cursor:pointer;
+  font-size:1.6rem;line-height:1;padding:16px;opacity:.65;transition:opacity .2s;font-family:inherit}
+.lb button:hover{opacity:1}
+.lb-x{top:10px;right:14px;font-size:2rem}
+.lb-pv{left:6px;top:50%;transform:translateY(-50%)}
+.lb-nx{right:6px;top:50%;transform:translateY(-50%)}
+@media (max-width:560px){.lb-pv,.lb-nx{top:auto;bottom:8px;transform:none}.lb-pv{left:20%}.lb-nx{right:20%}}
 
 
 /* international */

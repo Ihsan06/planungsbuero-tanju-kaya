@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/v2.css?v=46">
+<link rel="stylesheet" href="assets/css/v2.css?v=47">
 
 <script type="application/ld+json">
 {
@@ -159,10 +159,10 @@
     <div class="sec-head rv">
       <span class="eyebrow" data-i18n="projEyebrow">Projekte</span>
       <h2 class="h-lg" data-i18n="projTitle">Referenzen, die man sehen sollte.</h2>
-      <p class="lead" data-i18n="projLead">Jede Kategorie bekommt eine eigene Seite mit Fotos, Kurzbeschreibung, Ort und Jahr – genau das, wonach Auftraggeber und Google suchen.</p>
+      <p class="lead" data-i18n="projLead">Ein Querschnitt aus dem Archiv des Büros, nach Themen sortiert – von der Werkhalle bis zum Empfang. Ein Klick auf ein Bild öffnet die große Ansicht.</p>
     </div>
 
-    <div class="grid-proj rv" id="projGrid"></div>
+    <div id="mosaik"></div>
 
   </div>
 </section>
@@ -326,7 +326,19 @@
   </div>
 </footer>
 
-<script src="assets/js/v2.js?v=46"></script>
-<script src="assets/js/switch.js?v=46"></script>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Projektansicht">
+  <button class="lb-x" type="button" aria-label="Schließen">&times;</button>
+  <button class="lb-pv" type="button" aria-label="Vorheriges Bild">&lsaquo;</button>
+  <figure>
+    <img alt="">
+    <figcaption><b></b><span></span></figcaption>
+  </figure>
+  <button class="lb-nx" type="button" aria-label="Nächstes Bild">&rsaquo;</button>
+</div>
+
+<script src="assets/js/bilder.js?v=47"></script>
+<script src="assets/js/v2.js?v=47"></script>
+<script src="assets/js/mosaik.js?v=47"></script>
+<script src="assets/js/switch.js?v=47"></script>
 </body>
 </html>
