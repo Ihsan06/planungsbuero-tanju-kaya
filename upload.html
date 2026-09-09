@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fotos hochladen – Planungsbüro Tanju Kaya</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Cpath d='M6 24V8h3v7l7-7h4l-7 7 8 9h-4l-6-7-2 2v5z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;500&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--fg:#fff;--mute:#8d8d8d;--faint:#5c5c5c;--line:rgba(255,255,255,.14);
+  --ok:#7fb98a;--warn:#d98b6a;--h:"Raleway",system-ui,sans-serif;--b:"Lato",system-ui,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--fg);font:300 16px/1.7 var(--b);-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin-inline:auto;padding:clamp(28px,6vw,64px) clamp(20px,5vw,40px) 80px}
+h1{margin:0;font-family:var(--h);font-weight:200;font-size:clamp(1.9rem,6vw,3rem);letter-spacing:.06em;text-transform:uppercase;line-height:1.1}
+.cap{font-family:var(--h);font-size:.66rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--mute)}
+p{margin:0}
+.lead{margin-top:20px;color:#cfcfcf;max-width:52ch}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+#drop{margin-top:34px;border:1px dashed var(--line);padding:clamp(32px,7vw,56px) 24px;text-align:center;transition:border-color .25s,background .25s}
+#drop.over{border-color:#fff;background:rgba(255,255,255,.05)}
+#drop b{display:block;font-family:var(--h);font-weight:300;font-size:1.2rem;letter-spacing:.02em}
+#drop small{display:block;margin-top:10px;color:var(--faint);font-size:.82rem}
+.btn{display:inline-block;margin-top:22px;padding:14px 32px;border:1px solid var(--line);background:#fff;color:#000;
+  font-family:var(--h);font-size:.68rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;cursor:pointer}
+.btn:hover{background:#e6e6e6}
+.btn[disabled]{opacity:.45;cursor:default}
+.btn.ghost{background:none;color:#fff}
+.btn.ghost:hover{background:rgba(255,255,255,.07)}
+
+ul{list-style:none;margin:26px 0 0;padding:0;border-top:1px solid var(--line)}
+li{display:grid;grid-template-columns:1fr auto;gap:6px 16px;padding:13px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+li .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+li .s{font-family:var(--h);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);white-space:nowrap}
+li.fertig .s{color:var(--ok)}
+li.fehler .s{color:var(--warn)}
+li .bar{grid-column:1/-1;height:2px;background:rgba(255,255,255,.12)}
+li .bar i{display:block;height:100%;width:0;background:#fff;transition:width .2s}
+li.fertig .bar i{background:var(--ok)}
+li.fehler .bar i{background:var(--warn)}
+
+.hinweis{margin-top:30px;border:1px solid var(--line);padding:18px 20px;font-size:.86rem;color:var(--mute)}
+.hinweis.gut{border-color:rgba(127,185,138,.5);color:#cfe4d3}
+.hinweis.schlecht{border-color:rgba(217,139,106,.5);color:#f0d2c4}
+.fuss{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);font-size:.78rem;color:var(--faint)}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <span class="cap">Planungsbüro Tanju Kaya</span>
+  <h1 style="margin-top:16px">Fotos hochladen</h1>
+  <p class="lead" id="lead">Hier können Sie Ihre Projektfotos und Pläne ablegen. Kein Konto, keine Anmeldung – Dateien auswählen, fertig. Auch mehrere auf einmal, direkt vom Handy.</p>
+
+  <div id="drop">
+    <b id="dropTitel">Dateien hierher ziehen</b>
+    <small>JPG, PNG, HEIC, TIFF, WebP oder PDF · bis 40 MB je Datei</small>
+    <input id="feld" class="sr" type="file" multiple accept="image/*,application/pdf">
+    <button class="btn" type="button" id="waehlen">Dateien auswählen</button>
+  </div>
+
+  <ul id="liste"></ul>
+
+  <p id="melden" class="hinweis" hidden></p>
+
+  <button class="btn ghost" type="button" id="senden" hidden>Hochladen starten</button>
+
+  <p class="fuss">Fragen? Melden Sie sich einfach bei Ihsan.</p>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var code = new URLSearchParams(location.search).get("c") || "";
+  var feld = document.getElementById("feld");
+  var drop = document.getElementById("drop");
+  var liste = document.getElementById("liste");
+  var melden = document.getElementById("melden");
+  var senden = document.getElementById("senden");
+  var warteschlange = [];
+
+  if (!code) {
+    zeige("Dieser Link ist unvollständig. Bitte den Link aus der Nachricht noch einmal vollständig öffnen.", "schlecht");
+  }
+
+  function zeige(text, art) {
+    melden.textContent = text;
+    melden.className = "hinweis" + (art ? " " + art : "");
+    melden.hidden = false;
+  }
+  function groesse(b) {
+    return b >= 1048576 ? (b / 1048576).toFixed(1) + " MB" : Math.max(1, Math.round(b / 1024)) + " KB";
+  }
+
+  document.getElementById("waehlen").addEventListener("click", function () { feld.click(); });
+  feld.addEventListener("change", function () { aufnehmen(feld.files); feld.value = ""; });
+
+  ["dragenter", "dragover"].forEach(function (e) {
+    drop.addEventListener(e, function (ev) { ev.preventDefault(); drop.classList.add("over"); });
+  });
+  ["dragleave", "drop"].forEach(function (e) {
+    drop.addEventListener(e, function (ev) { ev.preventDefault(); drop.classList.remove("over"); });
+  });
+  drop.addEventListener("drop", function (ev) {
+    if (ev.dataTransfer && ev.dataTransfer.files) aufnehmen(ev.dataTransfer.files);
+  });
+
+  function aufnehmen(dateien) {
+    var neu = 0;
+    Array.prototype.forEach.call(dateien, function (f) {
+      if (warteschlange.some(function (e) { return e.datei.name === f.name && e.datei.size === f.size; })) return;
+      var li = document.createElement("li");
+      li.innerHTML = '<span class="n"></span><span class="s">Wartet</span><span class="bar"><i></i></span>';
+      li.querySelector(".n").textContent = f.name + " · " + groesse(f.size);
+      liste.appendChild(li);
+      warteschlange.push({ datei: f, li: li, fertig: false });
+      neu++;
+    });
+    if (neu) {
+      senden.hidden = false;
+      melden.hidden = true;
+      document.getElementById("dropTitel").textContent = "Weitere Dateien hierher ziehen";
+    }
+  }
+
+  senden.addEventListener("click", function () {
+    if (!code) return zeige("Ohne vollständigen Link geht es leider nicht.", "schlecht");
+    var offen = warteschlange.filter(function (e) { return !e.fertig; });
+    if (!offen.length) return;
+    senden.disabled = true;
+    senden.textContent = "Wird hochgeladen …";
+    naechste(offen, 0);
+  });
+
+  // Eine Datei pro Anfrage: der Fortschritt bleibt nachvollziehbar und ein
+  // Fehler reisst nicht den ganzen Stapel mit.
+  function naechste(offen, i) {
+    if (i >= offen.length) {
+      senden.disabled = false;
+      senden.textContent = "Weitere hochladen";
+      var fehler = warteschlange.filter(function (e) { return e.li.classList.contains("fehler"); }).length;
+      var ok = warteschlange.filter(function (e) { return e.fertig; }).length;
+      zeige(fehler
+        ? ok + " von " + (ok + fehler) + " Dateien angekommen. Die übrigen bitte noch einmal versuchen."
+        : "Alles angekommen, vielen Dank. " + ok + (ok === 1 ? " Datei ist" : " Dateien sind") + " gespeichert.",
+        fehler ? "schlecht" : "gut");
+      return;
+    }
+    var e = offen[i];
+    var stand = e.li.querySelector(".s");
+    var balken = e.li.querySelector(".bar i");
+    e.li.classList.remove("fehler");
+    stand.textContent = "Lädt";
+
+    var daten = new FormData();
+    daten.append("datei", e.datei, e.datei.name);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/upload");
+    xhr.setRequestHeader("x-code", code);
+    xhr.upload.addEventListener("progress", function (ev) {
+      if (ev.lengthComputable) balken.style.width = Math.round((ev.loaded / ev.total) * 100) + "%";
+    });
+    xhr.addEventListener("load", function () {
+      var antwort = {};
+      try { antwort = JSON.parse(xhr.responseText); } catch (err) {}
+      if (xhr.status === 200 && antwort.ok) {
+        e.fertig = true;
+        e.li.classList.add("fertig");
+        stand.textContent = "Angekommen";
+        balken.style.width = "100%";
+      } else {
+        e.li.classList.add("fehler");
+        stand.textContent = antwort.fehler ? "Fehler" : "Fehler " + xhr.status;
+        balken.style.width = "100%";
+        if (antwort.fehler) zeige(antwort.fehler, "schlecht");
+      }
+      naechste(offen, i + 1);
+    });
+    xhr.addEventListener("error", function () {
+      e.li.classList.add("fehler");
+      stand.textContent = "Keine Verbindung";
+      balken.style.width = "100%";
+      naechste(offen, i + 1);
+    });
+    xhr.send(daten);
+  }
+})();
+</script>
+</body>
+</html>

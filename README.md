@@ -49,6 +49,9 @@ assets/img/hero.jpg    Hero-Foto Variante 2 (Unsplash, siehe unten)
 assets/img/p/          86 Projektfotos von t-kaya.de
 assets/img/logo.png    Wortmarke von t-kaya.de (weiß, transparent)
 assets/og.png          Vorschaubild für WhatsApp / LinkedIn / Google
+upload.html            Upload-Seite für den Kunden
+functions/api/         Pages Functions: upload, uploads, datei
+hole-bilder.sh         holt die Uploads auf den Rechner
 ```
 
 Keine Build-Tools. Lokal ansehen und deployen:
@@ -84,6 +87,35 @@ also dieselbe Technik wie auf autohaus-diezmann.de; unter 900 px Breite fällt e
 entsteht über Helligkeit statt Farbe. Kontrast 15:1 auf dem Hintergrund, 14,5:1 für Text
 auf Akzentflächen. Farbige Alternativen liegen in `Desktop/Kaja-Notizen/farbvarianten.png`;
 umstellen sind die vier Variablen oben in `assets/css/v2.css`.
+
+## Upload-Punkt für Tanju Kaya
+
+`https://t-kaya-demo.pages.dev/upload?c=<UPLOAD_CODE>`
+
+Eine Seite ohne Anmeldung: Link öffnen, Fotos auswählen oder hineinziehen, fertig.
+Funktioniert auf dem Handy. Angenommen werden JPG, PNG, HEIC, TIFF, WebP und PDF
+bis 40 MB je Datei. Die Dateien landen im R2-Bucket `t-kaya-bilder`, abgelegt unter
+`JJJJ-MM-TT/<zeitstempel>-<zufall>-<name>`; der Originalname steht in den Metadaten.
+
+| Endpunkt | Zweck | Zugang |
+|---|---|---|
+| `POST /api/upload` | Datei ablegen | `UPLOAD_CODE` |
+| `GET /api/uploads` | Übersicht als JSON | `ADMIN_CODE` |
+| `GET /api/datei/<schlüssel>` | einzelne Datei laden | `ADMIN_CODE` |
+
+Codes liegen als Pages-Secrets und zusätzlich in `Desktop/Kaja-Notizen/upload-codes.txt`
+(nicht im Repo). Alles herunterladen:
+
+```bash
+ADMIN_CODE=xxxxx ./hole-bilder.sh kaya-uploads
+```
+
+Wer den Upload-Link hat, kann hochladen – der Link gehört also nicht in die Öffentlichkeit.
+Zum Zurückziehen einfach ein neues Secret setzen:
+
+```bash
+printf 'neuercode' | npx wrangler pages secret put UPLOAD_CODE --project-name=t-kaya-demo
+```
 
 ## Was noch fehlt (kommt vom Büro)
 

@@ -1,4 +1,13 @@
-# Cloudflare Pages Konfiguration – Entwurf Planungsbüro Tanju Kaya.
+# Cloudflare Pages Konfiguration – Planungsbüro Tanju Kaya.
 name = "t-kaya-demo"
 pages_build_output_dir = "."
 compatibility_date = "2026-06-01"
+
+# Ablage für die Fotos, die Tanju Kaya über /upload hochlädt.
+[[r2_buckets]]
+binding = "BILDER"
+bucket_name = "t-kaya-bilder"
+
+# Zugangscodes NICHT hier eintragen, sondern als Secrets:
+#   wrangler pages secret put UPLOAD_CODE --project-name=t-kaya-demo
+#   wrangler pages secret put ADMIN_CODE  --project-name=t-kaya-demo
