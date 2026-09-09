@@ -13,11 +13,26 @@
   var punkteEl = document.getElementById('diaPunkte');
   if (!buehne || !window.TK_BILDER) return;
 
-  // Nur die stärksten Querformate, damit nichts angeschnitten wirkt
-  var auswahl = TK_BILDER
-    .filter(function (b) { return (b.stern || 0) >= 3 && b.w / b.h >= 1.5; })
-    .sort(function (a, b) { return String(b.jahr).localeCompare(String(a.jahr)); })
-    .slice(0, 7);
+  // Feste Auswahl statt Filter: gezeigt werden Motive mit Tiefe und Inhalt,
+  // keine leeren Räume und keine flachen Fassaden. Reihenfolge = Ablauf.
+  // Zum Ändern einfach die Dateinamen tauschen; sie stehen in
+  // assets/img/k/katalog.json im Feld "f".
+  var GEWUENSCHT = [
+    'produktion-spritzguss',
+    'optikerfachgeschaft',
+    'lager-und-kommissionierung',
+    'empfang-gaudlitz-entwurf',
+    'gewerbehof',
+    'montage-mit-autokran',
+    'leichtbauhalle-innenraum'
+  ];
+  var nachName = {};
+  TK_BILDER.forEach(function (b) { nachName[b.f] = b; });
+  var auswahl = GEWUENSCHT.map(function (n) { return nachName[n]; }).filter(Boolean);
+  // Falls ein Name nicht mehr passt: mit den besten Querformaten auffüllen
+  if (auswahl.length < 3) {
+    auswahl = TK_BILDER.filter(function (b) { return (b.stern || 0) >= 3 && b.w / b.h >= 1.5; }).slice(0, 7);
+  }
   if (!auswahl.length) return;
 
   var ruhig = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
