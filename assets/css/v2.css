@@ -22,6 +22,7 @@
 
   --f-display:"Inter",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
   --ease:cubic-bezier(.22,.61,.36,1);
+  --kopf:53px;              /* Hoehe der Kopfleiste inkl. Trennlinie */
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -131,15 +132,19 @@ p{margin:0}
   position:relative;overflow:hidden;
   /* Fast der ganze Bildschirm: svh statt vh, damit die Adressleiste auf dem
      Handy nicht dazwischenfunkt. */
-  min-height:min(100svh,1040px);
+  /* Abzueglich der Kopfleiste: sie steht als sticky im Fluss, ohne den
+     Abzug haengen die letzten 53 Pixel des Bildes unter dem Rand. */
+  min-height:min(calc(100svh - var(--kopf)),1040px);
   padding:clamp(96px,13vw,150px) 0 clamp(104px,13vw,168px);
   display:flex;align-items:center;
   background:var(--bg);
 }
-@supports not (height:100svh){.hero{min-height:min(100vh,1040px)}}
+@supports not (height:100svh){.hero{min-height:min(calc(100vh - var(--kopf)),1040px)}}
 .dia{position:absolute;inset:-14% 0;z-index:0;pointer-events:none;will-change:transform}
 
-.dia-ebene{position:absolute;inset:0;opacity:0;transition:opacity 1.5s var(--ease)}
+/* Die Ueberblendung setzt spaet ein und laeuft weich aus, damit die beiden
+   Motive nicht als Doppelbild uebereinanderliegen. */
+.dia-ebene{position:absolute;inset:0;opacity:0;transition:opacity 1.2s cubic-bezier(.4,0,.2,1)}
 .dia-ebene.an{opacity:1}
 .dia-ebene img{
   width:100%;height:100%;object-fit:cover;will-change:transform;
@@ -148,10 +153,10 @@ p{margin:0}
      knochenweissen Akzent passen. */
   filter:grayscale(.66) sepia(.14) contrast(1.06) brightness(.94) saturate(1.1);
 }
-/* Ken Burns: das sichtbare Bild wandert langsam, Richtung wechselt je Bild */
-.dia-ebene.links img{transform:scale(1.12) translate3d(1.4%,0,0)}
-.dia-ebene.rechts img{transform:scale(1.12) translate3d(-1.4%,0,0)}
-.dia-ebene.an img{transform:scale(1) translate3d(0,0,0);transition:transform 9s linear}
+/* Die Fahrt selbst steht nicht mehr hier, sondern in dia.js: jedes Motiv
+   bekommt seine eigene Bewegung, und sie laeuft ueber die Ueberblendung
+   hinaus weiter. Frueher hing Transform und Transition gemeinsam an .an -
+   beim Wechsel fiel beides zugleich weg und das ausgehende Bild sprang. */
 
 /* Schleier: sorgt dafuer, dass die Schrift auf jedem Motiv lesbar bleibt */
 .schleier{
@@ -178,19 +183,31 @@ p{margin:0}
   opacity:0;transform:translateY(6px);transition:opacity .7s var(--ease),transform .7s var(--ease)
 }
 .dia-titel.an{opacity:1;transform:none}
-.dia-punkte{display:flex;gap:7px;flex:none}
-.dia-punkte i{
-  display:block;width:22px;height:2px;background:rgba(237,234,229,.26);
-  cursor:pointer;transition:background .4s var(--ease)
+/* Der sichtbare Strich bleibt fein, die Schaltflaeche darum herum ist
+   bewusst gross: rund 42 x 29 Pixel, damit man sie mit dem Daumen trifft. */
+.dia-punkte{display:flex;gap:2px;flex:none;margin-right:-6px}
+.dia-punkt{
+  appearance:none;-webkit-appearance:none;background:none;border:0;margin:0;
+  padding:13px 6px;line-height:0;font:inherit;color:inherit;cursor:pointer;
+  -webkit-tap-highlight-color:transparent
 }
-.dia-punkte i.an{background:var(--accent)}
+.dia-punkt::before{
+  content:"";display:block;width:30px;height:3px;
+  background:rgba(237,234,229,.26);
+  transition:background .4s var(--ease),width .5s var(--ease)
+}
+.dia-punkt:hover::before{background:rgba(237,234,229,.62)}
+.dia-punkt.an::before{background:var(--accent);width:46px}
+.dia-punkt:focus-visible{outline:1px solid var(--accent);outline-offset:-5px}
 @media (max-width:620px){
   .dia-fuss{flex-direction:column;align-items:flex-start;gap:10px}
-  .dia-punkte i{width:16px}
+  .dia-punkte{margin-left:-7px;margin-right:0}
+  .dia-punkt{padding:14px 7px}
+  .dia-punkt::before{width:26px}
+  .dia-punkt.an::before{width:38px}
 }
 @media (prefers-reduced-motion:reduce){
-  .dia-ebene,.dia-ebene img,.dia-titel{transition:none}
-  .dia-ebene.an img{transform:none}
+  .dia-ebene,.dia-ebene img,.dia-titel,.dia-punkt::before{transition:none}
 }
 
 /* Abschnitt mit fixiertem Bildhintergrund */

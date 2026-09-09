@@ -22,6 +22,7 @@
 
   --f-display:"Inter",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
   --ease:cubic-bezier(.22,.61,.36,1);
+  --kopf:53px;              /* Hoehe der Kopfleiste inkl. Trennlinie */
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -131,7 +132,9 @@ p{margin:0}
   position:relative;overflow:hidden;
   /* Fuellt immer den ganzen Bildschirm. svh statt vh, damit die ein- und
      ausfahrende Adressleiste auf dem Handy nicht dazwischenfunkt. */
-  min-height:min(100svh,1040px);
+  /* Abzueglich der Kopfleiste: sie steht als sticky im Fluss, ohne den
+     Abzug haengen die letzten 53 Pixel des Bildes unter dem Rand. */
+  min-height:min(calc(100svh - var(--kopf)),1040px);
   padding:clamp(96px,13vw,150px) 0 clamp(104px,13vw,168px);
   display:flex;align-items:center;
   background-color:var(--bg);
@@ -144,7 +147,7 @@ p{margin:0}
   background-repeat:no-repeat;
   background-attachment:fixed;
 }
-@supports not (height:100svh){.hero{min-height:min(100vh,1040px)}}
+@supports not (height:100svh){.hero{min-height:min(calc(100vh - var(--kopf)),1040px)}}
 .hero::before{
   content:"";position:absolute;inset:0;pointer-events:none;
   background-image:linear-gradient(rgba(237,234,229,.045) 1px,transparent 1px),
