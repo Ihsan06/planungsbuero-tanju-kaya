@@ -53,6 +53,8 @@
       else im.addEventListener('load', () => im.classList.add('da'), { once: true });
     });
     mehr.hidden = !(kat === 'alle' && !alleZeigen && liste.length > ANFANG);
+    // Letzte Zeile auffuellen, sonst endet das Raster halb leer
+    if (window.TK_REIHEN) TK_REIHEN.fuellen(galerie, '.bild');
   }
 
   filter.addEventListener('click', (e) => {
@@ -94,6 +96,7 @@
   });
 
   knoepfe();
+  if (window.TK_REIHEN) TK_REIHEN.beobachten(galerie, '.bild');
 
   /* ---------------------------------------------------------
      2. Sprachumschaltung DE / TR

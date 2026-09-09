@@ -62,6 +62,8 @@
     });
 
     TK.bilderAufblenden(teppich);
+    // Letzte Zeile auffuellen, sonst endet der Teppich halb leer
+    if (window.TK_REIHEN) TK_REIHEN.fuellen(teppich, '.feld');
     mehr.hidden = !(kat === 'alle' && !alleZeigen && liste.length > ANFANG);
     zaehler.textContent = sichtbar.length + ' / ' + liste.length +
       (sprache === 'tr' ? ' fotoğraf' : ' Aufnahmen');
@@ -90,6 +92,7 @@
     zeichnen();
   });
 
+  if (window.TK_REIHEN) TK_REIHEN.beobachten(teppich, '.feld');
   TK.kopf(document.getElementById('kopf'), document.getElementById('burger'), document.getElementById('nav'));
   TK.formular(document.getElementById('formular'));
   TK.bilderAufblenden();

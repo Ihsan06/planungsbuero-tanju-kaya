@@ -4,9 +4,15 @@ Neue Website für das **Planungsbüro Tanju Kaya**, Coburg — in Arbeit. Erstel
 
 **Live-Vorschau:** https://t-kaya-demo.pages.dev/ (Cloudflare Pages, Projekt `t-kaya-demo`)
 
-Eine Seite, dunkel und ausführlich: Foto-Hero mit fixiertem Hintergrund, Leistungen,
-Projektkategorien, International, Bürovorstellung, Kontaktformular.
-Die frühere minimale Variante 1 ist entfallen; `/v2` leitet auf die Startseite um.
+Zwei Varianten, umschaltbar oben rechts:
+
+| | Datei | Idee |
+|---|---|---|
+| **Variante 1** | `index.html` | Dunkel. Im Kopfbereich eine automatische Diashow aus den stärksten Projektfotos, darunter Leistungen, Galerie mit Filter, International, Büro, Kontakt |
+| **Variante 3** | `v3.html` | Reines Weiß, Archivo Narrow in Versalien. Kein Hero-Bild, stattdessen sofort ein Fototeppich mit allen 44 Projekten |
+
+Die editoriale Variante 2 wurde verworfen. Die Nummern 1 und 3 bleiben, damit
+bereits geteilte Links weiter stimmen.
 
 ---
 
@@ -28,21 +34,28 @@ Die Seite ist bewusst auf `noindex` gesetzt, damit der Entwurf nicht bei Google 
 ## Aufbau
 
 ```
-index.html             die Website
+index.html             Variante 1 (dunkel, mit Diashow)
+v3.html                Variante 3 (weiß, Fototeppich)
 404.html               Fehlerseite
-assets/css/v2.css      Stil
-assets/js/v2.js        Sprachumschaltung DE/TR, Galerie, Lightbox, Formular
+assets/css/v1.css      Stil Variante 1
+assets/css/v3.css      Stil Variante 3
+assets/css/gemeinsam.css  Lightbox, Einblenden, Fokus – von v3 genutzt
+assets/js/v1.js        Galerie, Lightbox, Sprachumschaltung Variante 1
+assets/js/v3.js        Fototeppich, Filter Variante 3
+assets/js/dia.js       Diashow im Kopfbereich von Variante 1
+assets/js/reihen.js    füllt die letzte Zeile eines Bildrasters auf
+assets/js/gemeinsam.js Bausteine für Variante 3
 assets/js/bilder.js    Bilddaten der Galerie (aus katalog.json erzeugt)
-assets/img/k/          44 Projektbilder in zwei Größen + katalog.json
+assets/js/tr.js        türkische Fassung für Variante 3
+assets/js/switch.js    Varianten-Umschalter
+assets/img/k/          44 Projektbilder in drei Größen + katalog.json
 assets/img/p/          vier Restbilder von der alten Website
-assets/img/hero.jpg    Hero (Gaudlitz, Dämmerung)
-assets/img/intl.jpg    Hintergrund Abschnitt International (Stockfoto)
 assets/img/portrait.jpg  Porträt Tanju Kaya
+assets/img/intl.jpg    Hintergrund Abschnitt International (Stockfoto)
 assets/og.png          Vorschaubild für WhatsApp / LinkedIn / Google
 upload.html            Upload-Seite für den Kunden
 functions/api/         Pages Functions: upload, uploads, datei
 hole-bilder.sh         holt die Uploads auf den Rechner
-_redirects             /v2 → /
 ```
 
 Keine Build-Tools. Lokal ansehen und deployen:
