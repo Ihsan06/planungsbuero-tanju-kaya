@@ -159,11 +159,23 @@ p{margin:0}
   background-attachment:fixed;
 }
 #international{
+  /* Wie in Variante 1: duenner Schleier, damit die Skyline zu sehen ist.
+     Die Lesbarkeit uebernehmen hellerer Lauftext und ein Schriftschatten. */
   background-image:
-    linear-gradient(rgba(11,11,12,.8),rgba(11,11,12,.9)),
+    linear-gradient(180deg,rgba(9,9,10,.46) 0%,rgba(9,9,10,.5) 45%,rgba(9,9,10,.66) 100%),
     url("../img/intl.jpg?v=1");
   background-position:center 40%;
+  padding-block:clamp(76px,9vw,144px);
 }
+#international .eyebrow,#international h2,#international .lead{
+  text-shadow:0 2px 22px rgba(5,5,6,.9),0 1px 4px rgba(5,5,6,.7)
+}
+#international .lead{color:#d8d4ce}
+#international .intl-list li{
+  color:#ddd9d3;border-color:rgba(255,255,255,.34);
+  background:rgba(9,9,10,.32);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)
+}
+#international .intl-list li:hover{border-color:var(--accent);color:#fff}
 
 @media (max-width:900px){
   .hero,.sec-bg{background-attachment:scroll}

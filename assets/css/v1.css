@@ -206,6 +206,8 @@ p{margin:0}
     linear-gradient(180deg,rgba(9,9,10,.46) 0%,rgba(9,9,10,.5) 45%,rgba(9,9,10,.66) 100%),
     url("../img/intl.jpg?v=1");
   background-position:center 40%;
+  /* Rund 30 Prozent hoeher, damit mehr von der Skyline zu sehen ist */
+  padding-block:clamp(58px,7vw,110px);
 }
 #international .eyebrow,#international h2,#international .lead{
   text-shadow:0 2px 22px rgba(5,5,6,.9),0 1px 4px rgba(5,5,6,.7)
