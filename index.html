@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de" data-variant="v1">
+<html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/v1.css?v=29">
+<link rel="stylesheet" href="assets/css/v1.css?v=31">
 
 <script type="application/ld+json">
 {
@@ -68,8 +68,8 @@
     </a>
 
     <nav class="nav" id="nav" aria-label="Hauptnavigation">
-      <a href="#leistungen" data-i18n="navServices">Leistungen</a>
       <a href="#projekte" data-i18n="navProjects">Projekte</a>
+      <a href="#leistungen" data-i18n="navServices">Leistungen</a>
       <a href="#international" data-i18n="navIntl">International</a>
       <a href="#buero" data-i18n="navOffice">Büro</a>
       <a href="#kontakt" data-i18n="navContact">Kontakt</a>
@@ -113,8 +113,23 @@
   </div>
 </section>
 
+<!-- ============ PROJEKTE ============ -->
+<section class="sec sec-alt" id="projekte">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 class="eyebrow" data-i18n="projEyebrow">Projekte</h2>
+    </div>
+
+    <div class="filter rv" id="filter"></div>
+    <div class="galerie rv" id="galerie"></div>
+    <div class="mehr" id="mehr" hidden>
+      <button class="btn btn-ghost" type="button" data-i18n="mehrBtn">Alle Projekte zeigen</button>
+    </div>
+  </div>
+</section>
+
 <!-- ============ LEISTUNGEN ============ -->
-<section class="sec sec-alt" id="leistungen">
+<section class="sec" id="leistungen">
   <div class="wrap">
     <div class="sec-head rv">
       <h2 class="eyebrow" data-i18n="servEyebrow">Leistungen</h2>
@@ -161,21 +176,6 @@
         <h3 data-i18n="s8t">Möbeldesign</h3>
         <p data-i18n="s8d">Einzelstücke und Serienmöbel, konstruiert für Werkstatt und industrielle Fertigung.</p>
       </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PROJEKTE ============ -->
-<section class="sec" id="projekte">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <h2 class="eyebrow" data-i18n="projEyebrow">Projekte</h2>
-    </div>
-
-    <div class="filter rv" id="filter"></div>
-    <div class="galerie rv" id="galerie"></div>
-    <div class="mehr" id="mehr" hidden>
-      <button class="btn btn-ghost" type="button" data-i18n="mehrBtn">Alle Projekte zeigen</button>
     </div>
   </div>
 </section>
@@ -314,8 +314,8 @@
       <div>
         <h4 data-i18n="fCol2">Navigation</h4>
         <ul>
-          <li><a href="#leistungen" data-i18n="navServices">Leistungen</a></li>
           <li><a href="#projekte" data-i18n="navProjects">Projekte</a></li>
+          <li><a href="#leistungen" data-i18n="navServices">Leistungen</a></li>
           <li><a href="#buero" data-i18n="navOffice">Büro</a></li>
           <li><a href="#kontakt" data-i18n="navContact">Kontakt</a></li>
         </ul>
@@ -347,10 +347,9 @@
   <button class="lb-nx" type="button" aria-label="Nächstes Bild">&rsaquo;</button>
 </div>
 
-<script src="assets/js/bilder.js?v=29"></script>
-<script src="assets/js/reihen.js?v=29"></script>
-<script src="assets/js/dia.js?v=29"></script>
-<script src="assets/js/v1.js?v=29"></script>
-<script src="assets/js/switch.js?v=29"></script>
+<script src="assets/js/bilder.js?v=31"></script>
+<script src="assets/js/reihen.js?v=31"></script>
+<script src="assets/js/dia.js?v=31"></script>
+<script src="assets/js/v1.js?v=31"></script>
 </body>
 </html>
