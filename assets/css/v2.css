@@ -124,32 +124,73 @@ p{margin:0}
 }
 
 /* ---------- hero ---------- */
-/* Fixierter Hintergrund – gleiche Technik wie auf autohaus-diezmann.de:
-   background-attachment:fixed, auf schmalen Geraeten zurueck auf scroll,
-   weil iOS damit ruckelt. */
+/* Kopfbereich mit Diashow.
+   Die Buehne liegt absolut im Kopfbereich und ist etwas hoeher als dieser,
+   damit die Parallaxe beim Scrollen keine Kante freilegt. */
 .hero{
   position:relative;overflow:hidden;
-  /* Fuellt immer den ganzen Bildschirm. svh statt vh, damit die ein- und
-     ausfahrende Adressleiste auf dem Handy nicht dazwischenfunkt. */
+  /* Fast der ganze Bildschirm: svh statt vh, damit die Adressleiste auf dem
+     Handy nicht dazwischenfunkt. */
   min-height:min(100svh,1040px);
   padding:clamp(96px,13vw,150px) 0 clamp(104px,13vw,168px);
   display:flex;align-items:center;
-  background-color:var(--bg);
-  background-image:
-    linear-gradient(90deg,rgba(10,10,11,.93) 0%,rgba(10,10,11,.84) 40%,rgba(10,10,11,.55) 72%,rgba(10,10,11,.72) 100%),
-    linear-gradient(180deg,rgba(10,10,11,.75) 0%,rgba(10,10,11,0) 32%,rgba(10,10,11,0) 62%,var(--bg) 100%),
-    url("../img/v2-hero.jpg?v=2");
-  background-size:auto,auto,cover;
-  background-position:center,center,center 45%;
-  background-repeat:no-repeat;
-  background-attachment:fixed;
+  background:var(--bg);
 }
 @supports not (height:100svh){.hero{min-height:min(100vh,1040px)}}
+.dia{position:absolute;inset:-14% 0;z-index:0;pointer-events:none;will-change:transform}
+
+.dia-ebene{position:absolute;inset:0;opacity:0;transition:opacity 1.5s var(--ease)}
+.dia-ebene.an{opacity:1}
+.dia-ebene img{
+  width:100%;height:100%;object-fit:cover;will-change:transform;
+  /* Farbe stark zuruecknehmen und leicht anwaermen, damit die sehr
+     unterschiedlichen Motive eine gemeinsame Stimmung bekommen und zum
+     knochenweissen Akzent passen. */
+  filter:grayscale(.66) sepia(.14) contrast(1.06) brightness(.94) saturate(1.1);
+}
+/* Ken Burns: das sichtbare Bild wandert langsam, Richtung wechselt je Bild */
+.dia-ebene.links img{transform:scale(1.12) translate3d(1.4%,0,0)}
+.dia-ebene.rechts img{transform:scale(1.12) translate3d(-1.4%,0,0)}
+.dia-ebene.an img{transform:scale(1) translate3d(0,0,0);transition:transform 9s linear}
+
+/* Schleier: sorgt dafuer, dass die Schrift auf jedem Motiv lesbar bleibt */
+.schleier{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(96deg,rgba(8,8,9,.62) 0%,rgba(8,8,9,.4) 34%,rgba(8,8,9,.12) 64%,rgba(8,8,9,.06) 100%),
+    linear-gradient(180deg,rgba(8,8,9,.46) 0%,rgba(8,8,9,0) 18%,rgba(8,8,9,0) 72%,rgba(8,8,9,.68) 91%,var(--bg) 100%);
+}
 .hero::before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:linear-gradient(rgba(237,234,229,.045) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(237,234,229,.045) 1px,transparent 1px);
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background-image:linear-gradient(rgba(237,234,229,.03) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(237,234,229,.03) 1px,transparent 1px);
   background-size:64px 64px;
+}
+
+/* Titel und Punkte am unteren Rand */
+.dia-fuss{
+  position:absolute;left:0;right:0;bottom:clamp(54px,7vw,96px);z-index:3;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter);
+}
+.dia-titel{
+  margin:0;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-dim);
+  opacity:0;transform:translateY(6px);transition:opacity .7s var(--ease),transform .7s var(--ease)
+}
+.dia-titel.an{opacity:1;transform:none}
+.dia-punkte{display:flex;gap:7px;flex:none}
+.dia-punkte i{
+  display:block;width:22px;height:2px;background:rgba(237,234,229,.26);
+  cursor:pointer;transition:background .4s var(--ease)
+}
+.dia-punkte i.an{background:var(--accent)}
+@media (max-width:620px){
+  .dia-fuss{flex-direction:column;align-items:flex-start;gap:10px}
+  .dia-punkte i{width:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  .dia-ebene,.dia-ebene img,.dia-titel{transition:none}
+  .dia-ebene.an img{transform:none}
 }
 
 /* Abschnitt mit fixiertem Bildhintergrund */
@@ -178,9 +219,21 @@ p{margin:0}
 #international .intl-list li:hover{border-color:var(--accent);color:#fff}
 
 @media (max-width:900px){
-  .hero,.sec-bg{background-attachment:scroll}
+  .sec-bg{background-attachment:scroll}
 }
-.hero-in{position:relative;z-index:1}
+.hero-in{position:relative;z-index:3}
+.hero-in::before{
+  content:"";position:absolute;z-index:-1;pointer-events:none;
+  inset:-14% -6% -16% -60vw;
+  background:radial-gradient(115% 78% at 30% 52%,
+    rgba(8,8,9,.9) 0%,rgba(8,8,9,.78) 32%,rgba(8,8,9,.5) 56%,
+    rgba(8,8,9,.2) 74%,rgba(8,8,9,0) 88%);
+}
+/* Der Schleier ist bewusst duenn. Damit die Schrift trotzdem auf jedem Motiv
+   steht, bekommt sie einen weichen eigenen Schatten. */
+.hero .eyebrow,.hero h1,.hero .lead{text-shadow:0 2px 34px rgba(5,5,6,.95),0 1px 6px rgba(5,5,6,.75)}
+.hero h1{color:#cfccc6}
+.dia-titel{text-shadow:0 1px 14px rgba(6,6,7,.9)}
 .hero-name{
   margin:20px 0 0;font-size:clamp(2.9rem,10.5vw,8rem);font-weight:200;
   letter-spacing:.02em;line-height:.98;color:var(--accent);text-transform:uppercase;
