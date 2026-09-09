@@ -5,7 +5,7 @@
     { id: 'v2', nr: '2', href: '/v2', titel: 'Variante 2 – editorial, hell' }
   ];
   var jetzt = document.documentElement.getAttribute('data-variant') || 'v1';
-  var css = '.variant-switch{position:fixed;top:132px;right:16px;z-index:300;display:flex;align-items:stretch;' +
+  var css = '.variant-switch{position:fixed;top:106px;right:16px;z-index:300;display:flex;align-items:stretch;' +
     'background:rgba(16,16,17,.9);border:1px solid rgba(255,255,255,.18);' +
     'backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-family:Inter,Work Sans,system-ui,sans-serif}' +
     '.variant-switch a{width:32px;height:30px;display:inline-flex;align-items:center;justify-content:center;' +
