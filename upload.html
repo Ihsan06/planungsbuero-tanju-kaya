@@ -47,6 +47,12 @@ li.fehler .bar i{background:var(--warn)}
 .hinweis{margin-top:30px;border:1px solid var(--line);padding:18px 20px;font-size:.86rem;color:var(--mute)}
 .hinweis.gut{border-color:rgba(127,185,138,.5);color:#cfe4d3}
 .hinweis.schlecht{border-color:rgba(217,139,106,.5);color:#f0d2c4}
+.knoepfe{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+#kopf{margin-top:30px}
+.zaehler{display:flex;justify-content:space-between;gap:16px;font-family:var(--h);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin-bottom:10px}
+.gesamt{height:3px;background:rgba(255,255,255,.12)}
+.gesamt i{display:block;height:100%;width:0;background:#fff;transition:width .25s}
+ul{max-height:min(52vh,460px);overflow-y:auto}
 .fuss{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);font-size:.78rem;color:var(--faint)}
 </style>
 </head>
@@ -54,13 +60,22 @@ li.fehler .bar i{background:var(--warn)}
 <main class="wrap">
   <span class="cap">Planungsbüro Tanju Kaya</span>
   <h1 style="margin-top:16px">Fotos hochladen</h1>
-  <p class="lead" id="lead">Hier können Sie Ihre Projektfotos und Pläne ablegen. Kein Konto, keine Anmeldung – Dateien auswählen, fertig. Auch mehrere auf einmal, direkt vom Handy.</p>
+  <p class="lead" id="lead">Hier können Sie Ihre Projektfotos und Pläne ablegen. Kein Konto, keine Anmeldung – auswählen, fertig. Gern ganze Ordner auf einmal, auch direkt vom Handy.</p>
 
   <div id="drop">
     <b id="dropTitel">Dateien hierher ziehen</b>
-    <small>JPG, PNG, HEIC, TIFF, WebP oder PDF · bis 40 MB je Datei</small>
-    <input id="feld" class="sr" type="file" multiple accept="image/*,application/pdf">
-    <button class="btn" type="button" id="waehlen">Dateien auswählen</button>
+    <small>Fotos, RAW-Dateien und PDF-Pläne · bis 100 MB je Datei · beliebig viele</small>
+    <input id="feld" class="sr" type="file" multiple accept="image/*,application/pdf,.heic,.heif,.dng,.cr2,.cr3,.nef,.arw,.tif,.tiff">
+    <input id="feldOrdner" class="sr" type="file" multiple webkitdirectory directory>
+    <div class="knoepfe">
+      <button class="btn" type="button" id="waehlen">Dateien auswählen</button>
+      <button class="btn ghost" type="button" id="waehlenOrdner" hidden>Ganzen Ordner</button>
+    </div>
+  </div>
+
+  <div id="kopf" hidden>
+    <div class="zaehler"><span id="zText">0 von 0</span><span id="zGroesse"></span></div>
+    <div class="gesamt"><i id="gesamtBalken"></i></div>
   </div>
 
   <ul id="liste"></ul>
@@ -75,17 +90,28 @@ li.fehler .bar i{background:var(--warn)}
 <script>
 (function () {
   "use strict";
+  var GLEICHZEITIG = 3;                       // parallele Uploads
+  var ENDUNGEN = ["jpg","jpeg","png","webp","heic","heif","tif","tiff","gif","bmp",
+                  "avif","dng","cr2","cr3","nef","arw","raf","orf","rw2","pdf"];
+
   var code = new URLSearchParams(location.search).get("c") || "";
   var feld = document.getElementById("feld");
+  var feldOrdner = document.getElementById("feldOrdner");
   var drop = document.getElementById("drop");
   var liste = document.getElementById("liste");
   var melden = document.getElementById("melden");
   var senden = document.getElementById("senden");
+  var kopf = document.getElementById("kopf");
+  var zText = document.getElementById("zText");
+  var zGroesse = document.getElementById("zGroesse");
+  var gesamtBalken = document.getElementById("gesamtBalken");
   var warteschlange = [];
+  var laeuft = false;
 
-  if (!code) {
-    zeige("Dieser Link ist unvollständig. Bitte den Link aus der Nachricht noch einmal vollständig öffnen.", "schlecht");
-  }
+  // Ordnerauswahl gibt es nur am Rechner, auf dem Handy waere der Knopf sinnlos.
+  if ("webkitdirectory" in feldOrdner) document.getElementById("waehlenOrdner").hidden = false;
+
+  if (!code) zeige("Dieser Link ist unvollständig. Bitte den Link aus der Nachricht noch einmal vollständig öffnen.", "schlecht");
 
   function zeige(text, art) {
     melden.textContent = text;
@@ -93,11 +119,21 @@ li.fehler .bar i{background:var(--warn)}
     melden.hidden = false;
   }
   function groesse(b) {
-    return b >= 1048576 ? (b / 1048576).toFixed(1) + " MB" : Math.max(1, Math.round(b / 1024)) + " KB";
+    if (b >= 1073741824) return (b / 1073741824).toFixed(2) + " GB";
+    if (b >= 1048576) return (b / 1048576).toFixed(1) + " MB";
+    return Math.max(1, Math.round(b / 1024)) + " KB";
+  }
+  function passt(f) {
+    var t = String(f.type || "").toLowerCase();
+    if (t.indexOf("image/") === 0 || t === "application/pdf") return true;
+    if (t && t !== "application/octet-stream") return false;
+    return ENDUNGEN.indexOf(String(f.name || "").toLowerCase().split(".").pop()) !== -1;
   }
 
   document.getElementById("waehlen").addEventListener("click", function () { feld.click(); });
+  document.getElementById("waehlenOrdner").addEventListener("click", function () { feldOrdner.click(); });
   feld.addEventListener("change", function () { aufnehmen(feld.files); feld.value = ""; });
+  feldOrdner.addEventListener("change", function () { aufnehmen(feldOrdner.files); feldOrdner.value = ""; });
 
   ["dragenter", "dragover"].forEach(function (e) {
     drop.addEventListener(e, function (ev) { ev.preventDefault(); drop.classList.add("over"); });
@@ -110,54 +146,91 @@ li.fehler .bar i{background:var(--warn)}
   });
 
   function aufnehmen(dateien) {
-    var neu = 0;
+    var neu = 0, aussortiert = 0;
     Array.prototype.forEach.call(dateien, function (f) {
-      if (warteschlange.some(function (e) { return e.datei.name === f.name && e.datei.size === f.size; })) return;
+      if (!f.size) return;                                   // Ordnereinträge, .DS_Store
+      if (!passt(f)) { aussortiert++; return; }
+      var pfad = f.webkitRelativePath || "";
+      if (warteschlange.some(function (e) {
+        return e.datei.name === f.name && e.datei.size === f.size && e.pfad === pfad;
+      })) return;
       var li = document.createElement("li");
       li.innerHTML = '<span class="n"></span><span class="s">Wartet</span><span class="bar"><i></i></span>';
-      li.querySelector(".n").textContent = f.name + " · " + groesse(f.size);
+      li.querySelector(".n").textContent = (pfad || f.name) + " · " + groesse(f.size);
       liste.appendChild(li);
-      warteschlange.push({ datei: f, li: li, fertig: false });
+      warteschlange.push({ datei: f, pfad: pfad, li: li, fertig: false });
       neu++;
     });
     if (neu) {
       senden.hidden = false;
+      kopf.hidden = false;
       melden.hidden = true;
       document.getElementById("dropTitel").textContent = "Weitere Dateien hierher ziehen";
+      stand();
     }
+    if (aussortiert) {
+      zeige(aussortiert + (aussortiert === 1 ? " Datei wurde" : " Dateien wurden") +
+            " übersprungen, weil es keine Bilder oder PDFs sind.", null);
+    }
+  }
+
+  function stand() {
+    var fertig = warteschlange.filter(function (e) { return e.fertig; }).length;
+    var bytesGesamt = warteschlange.reduce(function (s, e) { return s + e.datei.size; }, 0);
+    var bytesFertig = warteschlange.reduce(function (s, e) { return s + (e.fertig ? e.datei.size : 0); }, 0);
+    zText.textContent = fertig + " von " + warteschlange.length + " Dateien";
+    zGroesse.textContent = groesse(bytesFertig) + " / " + groesse(bytesGesamt);
+    gesamtBalken.style.width = bytesGesamt ? Math.round((bytesFertig / bytesGesamt) * 100) + "%" : "0%";
   }
 
   senden.addEventListener("click", function () {
     if (!code) return zeige("Ohne vollständigen Link geht es leider nicht.", "schlecht");
+    if (laeuft) return;
     var offen = warteschlange.filter(function (e) { return !e.fertig; });
     if (!offen.length) return;
+    laeuft = true;
     senden.disabled = true;
     senden.textContent = "Wird hochgeladen …";
-    naechste(offen, 0);
+    melden.hidden = true;
+
+    // Mehrere Dateien gleichzeitig, sonst dauert ein ganzer Ordner ewig.
+    var i = 0, aktiv = 0;
+    function weiter() {
+      while (aktiv < GLEICHZEITIG && i < offen.length) {
+        aktiv++;
+        schicken(offen[i++], function () {
+          aktiv--;
+          stand();
+          if (i < offen.length) weiter();
+          else if (aktiv === 0) abschluss();
+        });
+      }
+    }
+    weiter();
   });
 
-  // Eine Datei pro Anfrage: der Fortschritt bleibt nachvollziehbar und ein
-  // Fehler reisst nicht den ganzen Stapel mit.
-  function naechste(offen, i) {
-    if (i >= offen.length) {
-      senden.disabled = false;
-      senden.textContent = "Weitere hochladen";
-      var fehler = warteschlange.filter(function (e) { return e.li.classList.contains("fehler"); }).length;
-      var ok = warteschlange.filter(function (e) { return e.fertig; }).length;
-      zeige(fehler
-        ? ok + " von " + (ok + fehler) + " Dateien angekommen. Die übrigen bitte noch einmal versuchen."
-        : "Alles angekommen, vielen Dank. " + ok + (ok === 1 ? " Datei ist" : " Dateien sind") + " gespeichert.",
-        fehler ? "schlecht" : "gut");
-      return;
-    }
-    var e = offen[i];
-    var stand = e.li.querySelector(".s");
+  function abschluss() {
+    laeuft = false;
+    senden.disabled = false;
+    var fehler = warteschlange.filter(function (e) { return !e.fertig; }).length;
+    var ok = warteschlange.filter(function (e) { return e.fertig; }).length;
+    senden.textContent = fehler ? "Fehlgeschlagene erneut versuchen" : "Weitere hochladen";
+    zeige(fehler
+      ? ok + " von " + (ok + fehler) + " Dateien sind angekommen. Die übrigen können Sie unten noch einmal versuchen."
+      : "Alles angekommen, vielen Dank. " + ok + (ok === 1 ? " Datei ist" : " Dateien sind") + " gespeichert.",
+      fehler ? "schlecht" : "gut");
+  }
+
+  function schicken(e, fertigCb) {
+    var standFeld = e.li.querySelector(".s");
     var balken = e.li.querySelector(".bar i");
     e.li.classList.remove("fehler");
-    stand.textContent = "Lädt";
+    standFeld.textContent = "Lädt";
 
     var daten = new FormData();
     daten.append("datei", e.datei, e.datei.name);
+    if (e.pfad) daten.append("pfad", e.pfad);
+
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/upload");
     xhr.setRequestHeader("x-code", code);
@@ -170,24 +243,28 @@ li.fehler .bar i{background:var(--warn)}
       if (xhr.status === 200 && antwort.ok) {
         e.fertig = true;
         e.li.classList.add("fertig");
-        stand.textContent = "Angekommen";
-        balken.style.width = "100%";
+        standFeld.textContent = "Angekommen";
       } else {
         e.li.classList.add("fehler");
-        stand.textContent = antwort.fehler ? "Fehler" : "Fehler " + xhr.status;
-        balken.style.width = "100%";
+        standFeld.textContent = antwort.fehler ? "Fehler" : "Fehler " + xhr.status;
         if (antwort.fehler) zeige(antwort.fehler, "schlecht");
       }
-      naechste(offen, i + 1);
+      balken.style.width = "100%";
+      fertigCb();
     });
     xhr.addEventListener("error", function () {
       e.li.classList.add("fehler");
-      stand.textContent = "Keine Verbindung";
+      standFeld.textContent = "Keine Verbindung";
       balken.style.width = "100%";
-      naechste(offen, i + 1);
+      fertigCb();
     });
     xhr.send(daten);
   }
+
+  // Versehentliches Schliessen waehrend eines grossen Uploads abfangen.
+  window.addEventListener("beforeunload", function (ev) {
+    if (laeuft) { ev.preventDefault(); ev.returnValue = ""; }
+  });
 })();
 </script>
 </body>

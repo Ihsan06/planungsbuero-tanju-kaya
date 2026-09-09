@@ -4,18 +4,9 @@ Neue Website für das **Planungsbüro Tanju Kaya**, Coburg — in Arbeit. Erstel
 
 **Live-Vorschau:** https://t-kaya-demo.pages.dev/ (Cloudflare Pages, Projekt `t-kaya-demo`)
 
-Zwei Design-Varianten, umschaltbar oben rechts:
-
-| | Datei | Idee |
-|---|---|---|
-| **Variante 1** | `index.html` | Minimal, schwarz/weiß, Raleway + Lato – bewusst nah an der jetzigen t-kaya.de, nur mit Inhalt: Galerie mit Filter und Lightbox |
-| **Variante 2** | `v2.html` | Ausführlicher: Foto-Hero mit Parallax, Leistungen, Projektkategorien, International, Assoziierte, Bürovorstellung, Türkis-Akzent |
-
-Die 86 Projektfotos und das Porträt stammen von der bisherigen Website (`wp-json`-Export,
-Originalgröße meist 290 px). Kategorien, Referenznamen (Potsdamer Platz Arkaden, Alexa Berlin,
-Ringcenter Berlin, Schlossparkcenter Schwerin), der Messebau-Text und die drei Assoziierten
-(allmilmö, ShopCrea, Struch) kommen von der Site-Version von 2016 aus dem Internet Archive;
-Leistungsphasen aus dem heinze.de-Profil.
+Eine Seite, dunkel und ausführlich: Foto-Hero mit fixiertem Hintergrund, Leistungen,
+Projektkategorien, International, Bürovorstellung, Kontaktformular.
+Die frühere minimale Variante 1 ist entfallen; `/v2` leitet auf die Startseite um.
 
 ---
 
@@ -37,21 +28,19 @@ Die Seite ist bewusst auf `noindex` gesetzt, damit der Entwurf nicht bei Google 
 ## Aufbau
 
 ```
-index.html             Variante 1 (minimal)
-v2.html                Variante 2 (ausführlich)
-assets/css/v1.css      Stil Variante 1
-assets/css/v2.css      Stil Variante 2
-assets/js/projects.js  Bildliste mit Kategorie und Projektname (aus Dateinamen abgeleitet – prüfen!)
-assets/js/v1.js        Galerie, Filter, Lightbox, DE/TR, Formular
-assets/js/v2.js        Sprachumschaltung, Kacheln, Formular
-assets/js/switch.js    Varianten-Umschalter (gleiche Mechanik wie bei den anderen Demos)
-assets/img/hero.jpg    Hero-Foto Variante 2 (Unsplash, siehe unten)
-assets/img/p/          86 Projektfotos von t-kaya.de
-assets/img/logo.png    Wortmarke von t-kaya.de (weiß, transparent)
+index.html             die Website
+assets/css/v2.css      Stil
+assets/js/v2.js        Sprachumschaltung DE/TR, Projektkacheln, Parallax, Formular
+assets/img/hero.jpg    Hero-Foto (fixierter Hintergrund)
+assets/img/intl.jpg    Hintergrund Abschnitt International
+assets/img/portrait.jpg  Porträt Tanju Kaya
+assets/img/p/          Fotoarchiv von der alten Website (88 Dateien, davon nutzt
+                       die Seite aktuell 12 – der Rest wartet auf die Projektseiten)
 assets/og.png          Vorschaubild für WhatsApp / LinkedIn / Google
 upload.html            Upload-Seite für den Kunden
 functions/api/         Pages Functions: upload, uploads, datei
 hole-bilder.sh         holt die Uploads auf den Rechner
+_redirects             /v2 → /
 ```
 
 Keine Build-Tools. Lokal ansehen und deployen:
@@ -94,7 +83,7 @@ umstellen sind die vier Variablen oben in `assets/css/v2.css`.
 
 Eine Seite ohne Anmeldung: Link öffnen, Fotos auswählen oder hineinziehen, fertig.
 Funktioniert auf dem Handy. Angenommen werden JPG, PNG, HEIC, TIFF, WebP und PDF
-bis 40 MB je Datei. Die Dateien landen im R2-Bucket `t-kaya-bilder`, abgelegt unter
+bis 100 MB je Datei. Die Dateien landen im R2-Bucket `t-kaya-bilder`, abgelegt unter
 `JJJJ-MM-TT/<zeitstempel>-<zufall>-<name>`; der Originalname steht in den Metadaten.
 
 | Endpunkt | Zweck | Zugang |

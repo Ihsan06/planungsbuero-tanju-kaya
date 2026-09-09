@@ -30,15 +30,19 @@ export async function onRequestPost({ request, env }) {
   for (const datei of dateien) {
     if (datei.size === 0) continue;
     if (datei.size > MAX_BYTES) {
-      return json({ ok: false, fehler: `"${datei.name}" ist größer als 40 MB.` }, 413);
+      return json({ ok: false, fehler: `"${datei.name}" ist größer als 100 MB.` }, 413);
     }
-    if (!typErlaubt(datei.type)) {
+    if (!typErlaubt(datei.type, datei.name)) {
       return json({ ok: false, fehler: `"${datei.name}": Dateityp wird nicht angenommen.` }, 415);
     }
 
     const stempel = Date.now().toString(36);
     const zufall = Math.random().toString(36).slice(2, 8);
-    const schluessel = `${tag}/${stempel}-${zufall}-${nameSaeubern(datei.name)}`;
+    // Bei Ordner-Uploads liefert der Browser den Pfad im Feld "pfad" mit.
+    const pfad = form.getAll("pfad")[dateien.indexOf(datei)];
+    const ordner = String(pfad || "").split("/").slice(0, -1)
+      .map((t) => nameSaeubern(t)).filter(Boolean).slice(0, 3).join("/");
+    const schluessel = `${tag}/${ordner ? ordner + "/" : ""}${stempel}-${zufall}-${nameSaeubern(datei.name)}`;
 
     await env.BILDER.put(schluessel, datei.stream(), {
       httpMetadata: { contentType: datei.type },
