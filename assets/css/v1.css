@@ -267,7 +267,10 @@ section{position:relative}
 .sec{padding-block:var(--sec-y)}
 /* Projekte, Leistungen und Kontakt schliessen enger an den Abschnitt davor an */
 #projekte{padding-top:clamp(14px,1.8vw,26px)}
-#leistungen,#kontakt{padding-top:clamp(24px,3vw,44px)}
+#leistungen,#kontakt{padding-top:clamp(12px,1.5vw,22px)}
+/* Der sichtbare Abstand ist die Summe aus dem unteren Polster des Abschnitts
+   davor und dem oberen des folgenden - deshalb auch die Vorgaenger kuerzen. */
+#projekte,#buero{padding-bottom:clamp(18px,2.2vw,32px)}
 .sec-alt{background:var(--bg-2)}
 .sec-head{max-width:66ch;margin-bottom:clamp(20px,2.6vw,32px)}
 .sec-head h2{margin-top:14px}
