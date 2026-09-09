@@ -9,7 +9,7 @@ Zwei Varianten, umschaltbar oben rechts:
 | | Datei | Idee |
 |---|---|---|
 | **Variante 1** | `index.html` | Dunkel. Im Kopfbereich eine Diashow über den ganzen Bildschirm, danach Projekte, Leistungen, International, Büro, Kontakt |
-| **Variante 2** | `v2.html` | Hell und editorial. Warmes Off-White, Instrument Serif, Vollbild-Auftakt, Bildreihen mit gemischten Breiten, je Kategorie ein Block mit großem Leitbild |
+| **Variante 2** | `v2.html` | Der Stand von heute Mittag, den Tanju Kaya gesehen hat: dunkel, Foto-Hero mit Holzlamellen, acht Leistungskacheln, sechs feste Projektkacheln. Nutzt `assets/img/v2-hero.jpg`, damit Variante 1 ihr eigenes Hero-Foto behält |
 
 Der Entwurf 3 (Fototeppich) ist verworfen; `/v3` leitet auf die Startseite um.
 Er liegt vollständig in der Git-Historie.
@@ -39,11 +39,8 @@ v2.html                Variante 2 (hell, editorial)
 404.html               Fehlerseite
 assets/css/v1.css      Stil Variante 1
 assets/css/v2.css      Stil Variante 2
-assets/css/gemeinsam.css  Lightbox, Einblenden, Fokus – von Variante 2 genutzt
 assets/js/v1.js        Galerie, Lightbox, Sprachumschaltung Variante 1
-assets/js/v2.js        Bildreihen und Werkschau Variante 2
-assets/js/gemeinsam.js Bausteine für Variante 2
-assets/js/tr.js        türkische Fassung für Variante 2
+assets/js/v2.js        Sprachumschaltung, Projektkacheln, Formular Variante 2
 assets/js/dia.js       Diashow im Kopfbereich von Variante 1
 assets/js/reihen.js    füllt die letzte Zeile eines Bildrasters auf
 assets/js/bilder.js    Bilddaten der Galerie (aus katalog.json erzeugt)
@@ -52,6 +49,7 @@ assets/img/k/          44 Projektbilder in zwei Größen + katalog.json
 assets/img/p/          vier Restbilder von der alten Website
 assets/img/portrait.jpg  Porträt Tanju Kaya
 assets/img/intl.jpg    Hintergrund Abschnitt International (Stockfoto)
+assets/img/v2-hero.jpg   Hero-Foto Variante 2
 assets/og.png          Vorschaubild für WhatsApp / LinkedIn / Google
 upload.html            Upload-Seite für den Kunden
 functions/api/         Pages Functions: upload, uploads, datei

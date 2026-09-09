@@ -1,146 +1,187 @@
-/* Variante 2 – editorial. Baut die Bildreihen und die Werkschau aus dem Katalog. */
+/* Planungsbüro Tanju Kaya — Entwurf | main.js */
 (function () {
-  'use strict';
-  var lb = TK.lightbox();
-  var sprache = 'de';
+  "use strict";
 
-  /* Jedes Bild wird nur einmal verwendet. Wer zuerst fragt, bekommt das beste. */
-  var vergeben = Object.create(null);
-  function hol(anzahl, opt) {
-    opt = opt || {};
-    var quelle = TK.sortiert(TK.BILDER.filter(function (b) {
-      if (vergeben[b.f]) return false;
-      if (opt.kat && b.kat !== opt.kat) return false;
-      if (opt.format && TK.format(b) !== opt.format) return false;
-      if (opt.minStern && (b.stern || 0) < opt.minStern) return false;
-      return true;
-    }));
-    // Wenn die Wunschform nicht reicht, ohne Formatwunsch auffüllen
-    if (quelle.length < anzahl && opt.format) {
-      var rest = TK.sortiert(TK.BILDER.filter(function (b) {
-        return !vergeben[b.f] && (!opt.kat || b.kat === opt.kat) && quelle.indexOf(b) === -1;
-      }));
-      quelle = quelle.concat(rest);
+  /* ---------------------------------------------------------
+     1. Projektkacheln (Fotos von der bisherigen Website)
+     --------------------------------------------------------- */
+  const PROJECTS = [
+    { img: 'wohnhaus-02.jpg',        tag: { de: 'Architektur',     tr: 'Mimarlık' },         t: { de: 'Villen & Wohnhäuser',        tr: 'Villalar & Konutlar' },       m: { de: 'Entwurf bis Ausführung', tr: 'Tasarımdan uygulamaya' } },
+    { img: 'okado-002.jpg',          tag: { de: 'Ladenbau',        tr: 'Mağaza tasarımı' },  t: { de: 'Verkaufsflächen & Filialen', tr: 'Satış alanları & şubeler' },  m: { de: 'Innenausbau',            tr: 'İç yapım' } },
+    { img: 'lossaustr3a.jpg',        tag: { de: 'Altbausanierung', tr: 'Restorasyon' },      t: { de: 'Sanierung & Denkmalpflege',  tr: 'Restorasyon & koruma' },      m: { de: 'Coburg',                 tr: 'Coburg' } },
+    { img: 'walkmuehlgasse.jpg',     tag: { de: 'Wohnungsbau',     tr: 'Konut yapımı' },     t: { de: 'Mehrfamilienhäuser',         tr: 'Çok aileli konutlar' },       m: { de: 'Neubau',                 tr: 'Yeni yapı' } },
+    { img: 'kapp-05.jpg',            tag: { de: 'Messebau',        tr: 'Fuar standı' },      t: { de: 'Messestände & Displays',     tr: 'Fuar standları & teşhir' },   m: { de: 'Temporär',               tr: 'Geçici' } },
+    { img: 'produktdesign-06.jpg',   tag: { de: 'Produktdesign',   tr: 'Ürün tasarımı' },    t: { de: 'Möbel bis zur Serienreife',  tr: 'Seri üretime kadar mobilya' },m: { de: 'Design',                 tr: 'Tasarım' } }
+  ];
+
+  const grid = document.getElementById('projGrid');
+  if (grid) {
+    grid.innerHTML = PROJECTS.map(p => `
+      <a class="proj" href="#kontakt">
+        <div class="proj-art">
+          <span class="proj-tag" data-tag>${p.tag.de}</span>
+          <img src="assets/img/p/${p.img}" alt="" loading="lazy">
+        </div>
+        <div class="proj-body">
+          <h3 data-t>${p.t.de}</h3>
+          <span data-m>${p.m.de}</span>
+        </div>
+      </a>`).join('');
+  }
+
+  /* ---------------------------------------------------------
+     2. Sprachumschaltung DE / TR
+     --------------------------------------------------------- */
+  const TR = {
+    demoTitle: 'Önizleme',
+    demoText: ' – Planungsbüro Tanju Kaya’nın yeni web sitesi, hazırlık aşamasında.',
+    q5t: 'Hizmet aşamaları', q5d: 'Ön tasarım, uygulama projesi, ihale, şantiye denetimi',
+    q6t: 'Referanslar', q6d: 'Potsdamer Platz Arkaden, Alexa Berlin, Ringcenter Berlin, Schlossparkcenter Schwerin',
+    brandSub: 'Planlama bürosu · Coburg',
+    navServices: 'Hizmetler', navProjects: 'Projeler', navIntl: 'Uluslararası', navOffice: 'Büro', navContact: 'İletişim',
+
+    heroEyebrow: 'Planlama bürosu · Coburg · Almanya',
+    ctaProjects: 'Projeleri gör', ctaContact: 'Teklif isteyin',
+
+    servEyebrow: 'Hizmetler',
+    servTitle: 'Tek büro. Bütün süreç.',
+    servLead: 'Tasarım, ruhsat projesi, uygulama ve şantiye yönetimi – hepsi tek elden. Yatırımcılar, mağazalar, sanayi ve özel müşteriler için.',
+    s1t: 'Mimarlık & iç mimarlık', s1d: 'Konutlar, villalar ve iç mekânlar – tasarımdan ruhsata ve uygulama projesine kadar.',
+    s2t: 'Mağaza tasarımı',        s2d: 'Satan satış alanları – Potsdamer Platz Arkaden, Alexa ve Ringcenter Berlin, Schlossparkcenter Schwerin gibi.',
+    s3t: 'Fuar standı',            s3d: 'Akılda kalan fuar standları – Frankfurt, Münih, Köln, Berlin, Düsseldorf, Hannover, Milano, Madrid ve Paris fuarlarında.',
+    s4t: 'Endüstriyel yapı',       s4d: 'Hangarlar, üretim ve işletme binaları. İşlevsel planlanır, ekonomik inşa edilir.',
+    s5t: 'Restorasyon',            s5d: 'Mevcut yapıyı korumak ve geliştirmek – enerji, taşıyıcı sistem ve tasarım.',
+    s6t: 'Tarihi eser koruma',     s6d: 'Tescilli yapıların ilgili kurumlarla uyum içinde restorasyonu.',
+    s7t: 'Ürün tasarımı',          s7d: 'Tasarımdan seri üretime – prototip ve üretim dosyaları dahil.',
+    s8t: 'Mobilya tasarımı',       s8d: 'Tek parça ve seri mobilya, atölye ve endüstriyel üretim için detaylandırılmış.',
+
+    projEyebrow: 'Projeler',
+    projTitle: 'Görülmeye değer referanslar.',
+    projLead: 'Her kategori kendi sayfasını alır: fotoğraflar, kısa açıklama, yer ve yıl – müşterinin de Google’ın da aradığı tam olarak bu.',
+
+    intlEyebrow: 'Uluslararası',
+    intlTitle: 'Coburg’da planlandı. Altı ülkede inşa edildi.',
+    intlLead: 'Dominik Cumhuriyeti, Türkiye, Dubai, Kuveyt, Madrid ve Moskova’da villalar ve projeler – Alman planlama kalitesi, uluslararası uygulama, iki dilde takip.',
+    c1: 'Dominik Cumhuriyeti', c2: 'Türkiye', c3: 'Dubai', c4: 'Kuveyt', c5: 'Madrid', c6: 'Moskova',
+
+    officeEyebrow: 'Büro',
+    officeTitle: 'Her türlü yapı işinde güvenilir çözüm ortağınız.',
+    officeLead: 'Tasarımda kapsamlı kalite ve sizin isteklerinize göre bir uygulama – gücümüz bu. Seri üretime veya anahtar teslimine kadar yanınızdayız.',
+    q1t: 'Yönetim',    q1d: 'Dipl.-Ing. (FH) Tanju Kaya',
+    q2t: 'Oda / birlik',q2d: 'Alman Mimarlar Birliği (VDA), üye no. 4028',
+    q3t: 'Merkez',     q3d: 'Dr.-Hans-Schack-Straße 28, 96450 Coburg',
+    q4t: 'Uzmanlık',   q4d: 'Mağaza, fuar, endüstriyel yapı, restorasyon, koruma, ürün ve mobilya tasarımı',
+
+    contactEyebrow: 'İletişim',
+    contactTitle: 'Projenizi bize anlatın.',
+    contactLead: 'Kısa bir telefon ya da üç satır yeterli. Genellikle bir iş günü içinde dönüş yapıyoruz.',
+    kAddr: 'Adres', kPhone: 'Telefon', kFax: 'Faks', kMail: 'E-posta', kVat: 'Vergi no.',
+    fName: 'Adınız', fMail: 'E-posta', fTel: 'Telefon (isteğe bağlı)', fTopic: 'Konu', fMsg: 'Projeniz', fSend: 'Talebi gönder',
+    o1: 'Mimarlık / yeni yapı', o2: 'Mağaza tasarımı', o3: 'Fuar standı', o4: 'Endüstriyel yapı',
+    o5: 'Restorasyon / koruma', o6: 'Ürün & mobilya tasarımı', o7: 'Diğer',
+    fNote: 'Bu taslakta buton, hazır doldurulmuş bir e-posta açar. Yayına giren sitede talep doğrudan gönderilir – spam koruması ve otomatik alındı bildirimi ile.',
+
+    fCol1: 'Planungsbüro Tanju Kaya', fCol2: 'Menü', fCol3: 'İletişim',
+    footAbout: 'Mimarlık, mağaza tasarımı, fuar standı, endüstriyel yapı, restorasyon ve tasarım – Coburg’dan.',
+    fImpressum: 'Künye', fPrivacy: 'Gizlilik',
+    footDemo: 'Web sitesi: Ihsan Yılmaz'
+  };
+
+  const DE = {};
+  document.querySelectorAll('[data-i18n]').forEach(el => { DE[el.dataset.i18n] = el.textContent; });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => { DE[el.dataset.i18nHtml] = el.innerHTML; });
+
+  function setLang(lang) {
+    const dict = lang === 'tr' ? TR : DE;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const v = dict[el.dataset.i18n]; if (v != null) el.textContent = v;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const v = dict[el.dataset.i18nHtml]; if (v != null) el.innerHTML = v;
+    });
+    document.querySelectorAll('.proj').forEach((el, i) => {
+      const p = PROJECTS[i]; if (!p) return;
+      el.querySelector('[data-tag]').textContent = p.tag[lang] || p.tag.de;
+      el.querySelector('[data-t]').textContent = p.t[lang] || p.t.de;
+      el.querySelector('[data-m]').textContent = p.m[lang] || p.m.de;
+    });
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang button').forEach(b =>
+      b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+    try { localStorage.setItem('tk-lang', lang); } catch (e) {}
+  }
+
+  document.querySelectorAll('.lang button').forEach(b =>
+    b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+  let start = 'de';
+  try {
+    const saved = localStorage.getItem('tk-lang');
+    if (saved === 'de' || saved === 'tr') {
+      start = saved;
+    } else if ((navigator.language || '').toLowerCase().indexOf('tr') === 0) {
+      start = 'tr';
     }
-    var gewaehlt = quelle.slice(0, anzahl);
-    gewaehlt.forEach(function (b) { vergeben[b.f] = true; });
-    return gewaehlt;
-  }
+  } catch (e) {}
+  if (start !== 'de') setLang(start);
 
-  /* Eine anklickbare Kachel. gruppe = Liste für die Lightbox. */
-  function kachel(b, klasse, gruppe, index, groesse) {
-    var f = document.createElement('figure');
-    f.className = 'kachel' + (klasse ? ' ' + klasse : '');
-    f.tabIndex = 0;
-    f.setAttribute('role', 'button');
-    f.setAttribute('aria-label', b.t);
-    f.innerHTML =
-      '<img src="' + TK.pfad(b, groesse || 'k') + '" alt="' + b.t + '" width="' + b.w + '" height="' + b.h +
-      '" loading="lazy" decoding="async" data-blende>' +
-      '<figcaption><b></b><span></span></figcaption>';
-    f.querySelector('b').textContent = b.t;
-    f.querySelector('span').textContent = [TK.katName(b.kat, sprache), TK.zusatz(b)].filter(Boolean).join(' · ');
-    f.dataset.kat = b.kat;
-    function auf() { lb.oeffnen(gruppe, index, sprache); }
-    f.addEventListener('click', auf);
-    f.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); auf(); }
+  /* ---------------------------------------------------------
+     3. Navigation, Sticky-Header, Reveal
+     --------------------------------------------------------- */
+  const burger = document.getElementById('burger');
+  const nav = document.getElementById('nav');
+  if (burger) {
+    burger.addEventListener('click', () => {
+      const open = document.body.classList.toggle('nav-open');
+      burger.setAttribute('aria-expanded', String(open));
     });
-    return f;
-  }
-
-  /* ---------- Auftaktbild und Vollbild-Unterbrechung ---------- */
-  function vollbild(ziel, bild) {
-    if (!ziel || !bild) return;
-    ziel.innerHTML =
-      '<img src="' + TK.pfad(bild, 'gross') + '" alt="' + bild.t + '" width="' + bild.w + '" height="' + bild.h +
-      '" fetchpriority="high" decoding="async">' +
-      '<figcaption></figcaption>';
-    ziel.querySelector('figcaption').textContent = bild.t;
-  }
-  var auftakt = hol(1, { minStern: 3, format: 'quer' })[0];
-  vollbild(document.getElementById('auftaktBild'), auftakt);
-
-  /* ---------- Bildreihen ---------- */
-  function reihe(id, anzahl) {
-    var ziel = document.getElementById(id);
-    if (!ziel) return [];
-    var gruppe = hol(anzahl, { minStern: 2 });
-    gruppe.forEach(function (b, i) { ziel.appendChild(kachel(b, '', gruppe, i)); });
-    return gruppe;
-  }
-  reihe('reiheA', 3);
-
-  /* ---------- Werkschau: je Kategorie ein Block ---------- */
-  var werkschau = document.getElementById('werkschau');
-  var bloecke = [];
-  TK.kategorien.forEach(function (kat, n) {
-    var gruppe = hol(5, { kat: kat });
-    if (gruppe.length < 2) {                      // zu wenig Material für einen eigenen Block
-      gruppe.forEach(function (b) { vergeben[b.f] = false; });
-      return;
-    }
-    var block = document.createElement('div');
-    block.className = 'bahn block rv' + (n % 2 ? ' gedreht' : '');
-    var kopf = document.createElement('div');
-    kopf.className = 'block-kopf';
-    kopf.innerHTML = '<h3></h3><span></span>';
-    block.appendChild(kopf);
-
-    var raster = document.createElement('div');
-    raster.className = 'block-bilder';
-    gruppe.forEach(function (b, i) {
-      // erstes Bild groß, danach zwei schmale, danach halbe Breite
-      var klasse = i === 0 ? 'leit' : (i < 3 ? 'neben' : 'breit');
-      raster.appendChild(kachel(b, klasse, gruppe, i));
-    });
-    block.appendChild(raster);
-    werkschau.appendChild(block);
-    bloecke.push({ el: block, kat: kat, anzahl: gruppe.length, kopf: kopf });
-  });
-
-  function bloeckeBeschriften() {
-    bloecke.forEach(function (b) {
-      b.kopf.querySelector('h3').textContent = TK.katName(b.kat, sprache);
-      b.kopf.querySelector('span').textContent = b.anzahl + (sprache === 'tr' ? ' fotoğraf' : ' Aufnahmen');
+    nav.addEventListener('click', e => {
+      if (e.target.tagName === 'A') {
+        document.body.classList.remove('nav-open');
+        burger.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 
-  /* ---------- Vollbild-Unterbrechung und zweite Reihe ---------- */
-  vollbild(document.getElementById('bruchBild'), hol(1, { minStern: 2, format: 'quer' })[0]);
-  reihe('reiheB', 3);
+  const head = document.getElementById('head');
+  const onScroll = () => head.classList.toggle('is-stuck', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-  /* ---------- Beschriftungen bei Sprachwechsel nachziehen ---------- */
-  function kachelnBeschriften() {
-    document.querySelectorAll('.kachel').forEach(function (f) {
-      var b = TK.BILDER.filter(function (x) { return x.t === f.querySelector('b').textContent; })[0];
-      if (!b) return;
-      f.querySelector('figcaption span').textContent =
-        [TK.katName(b.kat, sprache), TK.zusatz(b)].filter(Boolean).join(' · ');
+  const io = 'IntersectionObserver' in window
+    ? new IntersectionObserver((entries, obs) => {
+        entries.forEach(en => {
+          if (en.isIntersecting) { en.target.classList.add('in'); obs.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: .12 })
+    : null;
+  document.querySelectorAll('.rv').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+
+  /* ---------------------------------------------------------
+     4. Kontaktformular (Entwurf: öffnet Mailprogramm)
+     --------------------------------------------------------- */
+  const form = document.getElementById('kform');
+  if (form) {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      const f = new FormData(form);
+      const tr = document.documentElement.lang === 'tr';
+      const subject = (tr ? 'Web talebi: ' : 'Anfrage über die Website: ') + (f.get('topic') || '');
+      const body = [
+        (tr ? 'Ad: ' : 'Name: ') + (f.get('name') || ''),
+        (tr ? 'E-posta: ' : 'E-Mail: ') + (f.get('mail') || ''),
+        (tr ? 'Telefon: ' : 'Telefon: ') + (f.get('tel') || '–'),
+        (tr ? 'Konu: ' : 'Thema: ') + (f.get('topic') || ''),
+        '',
+        (tr ? 'Mesaj:' : 'Nachricht:'),
+        f.get('msg') || ''
+      ].join('\n');
+      window.location.href = 'mailto:info@t-kaya.de?subject=' +
+        encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     });
   }
 
-  TK.sprachschalter(window.TK_TR || {}, function (spr) {
-    sprache = spr;
-    lb.sprache(spr);
-    bloeckeBeschriften();
-    kachelnBeschriften();
-  });
-
-  // Halb leere Schlussreihen auffuellen, in jedem Block und in beiden Reihen
-  if (window.TK_REIHEN) {
-    document.querySelectorAll('.block-bilder').forEach(function (r) {
-      TK_REIHEN.fuellen(r, '.kachel');
-      TK_REIHEN.beobachten(r, '.kachel');
-    });
-    ['reiheA', 'reiheB'].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) { TK_REIHEN.fuellen(el, '.kachel'); TK_REIHEN.beobachten(el, '.kachel'); }
-    });
-  }
-
-  TK.kopf(document.getElementById('kopf'), document.getElementById('burger'), document.getElementById('nav'));
-  TK.formular(document.getElementById('formular'));
-  TK.bilderAufblenden();
-  TK.einblenden('.rv');
+  const y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
 })();
