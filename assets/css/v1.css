@@ -16,8 +16,8 @@
   --accent-ink:#14140f;    /* Text auf Akzentflaechen, Kontrast 14.5:1 */
   --accent-soft:rgba(233,227,217,.10);
 
-  --maxw:1240px;
-  --gutter:clamp(20px,5vw,64px);
+  --maxw:min(94vw,1840px);
+  --gutter:clamp(18px,3.2vw,48px);
   --sec-y:clamp(36px,4.4vw,66px);
 
   --f-display:"Inter",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
@@ -62,7 +62,7 @@ p{margin:0}
 }
 .eyebrow::before{content:"";width:26px;height:1px;background:currentColor;opacity:.6;flex:none}
 @media (max-width:520px){.eyebrow{flex-wrap:wrap;letter-spacing:.16em;font-size:.64rem}}
-.lead{font-size:clamp(1.02rem,1.35vw,1.19rem);line-height:1.68;color:var(--fg-dim);font-weight:300}
+.lead{font-size:clamp(1.02rem,1.35vw,1.19rem);line-height:1.68;color:var(--fg-dim);font-weight:300;max-width:62ch}
 .measure{max-width:60ch}
 
 
@@ -311,7 +311,8 @@ section{position:relative}
 .filter button:hover{color:var(--fg-dim)}
 .filter button.an{color:var(--fg);border-bottom-color:var(--accent)}
 
-.galerie{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1vw,14px)}
+.galerie{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,.8vw,14px)}
+@media (max-width:1400px){.galerie{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:960px){.galerie{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.galerie{grid-template-columns:1fr}}
 

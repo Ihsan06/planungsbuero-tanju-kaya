@@ -7,7 +7,7 @@
      --------------------------------------------------------- */
   const BILDER = window.TK_BILDER || [];
   const KATS = window.TK_KATS || {};
-  const ANFANG = 12;
+  const ANFANG = 16;
   let kat = 'alle', alleZeigen = false, sprache = 'de';
 
   const filter = document.getElementById('filter');
