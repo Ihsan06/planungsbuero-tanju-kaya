@@ -135,7 +135,7 @@ p{margin:0}
   background-image:
     linear-gradient(90deg,rgba(10,10,11,.93) 0%,rgba(10,10,11,.84) 40%,rgba(10,10,11,.55) 72%,rgba(10,10,11,.72) 100%),
     linear-gradient(180deg,rgba(10,10,11,.75) 0%,rgba(10,10,11,0) 32%,rgba(10,10,11,0) 62%,var(--bg) 100%),
-    url("../img/v2-hero.jpg?v=1");
+    url("../img/v2-hero.jpg?v=2");
   background-size:auto,auto,cover;
   background-position:center,center,center 45%;
   background-repeat:no-repeat;
