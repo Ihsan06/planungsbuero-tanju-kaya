@@ -113,8 +113,6 @@
     ctaProjects: 'Projeleri gör', ctaContact: 'Teklif isteyin',
 
     servEyebrow: 'Hizmetler',
-    servTitle: 'Tek büro. Bütün süreç.',
-    servLead: 'Tasarım, ruhsat projesi, uygulama ve şantiye yönetimi – hepsi tek elden. Yatırımcılar, mağazalar, sanayi ve özel müşteriler için.',
     s1t: 'Mimarlık & iç mimarlık', s1d: 'Konutlar, villalar ve iç mekânlar – tasarımdan ruhsata ve uygulama projesine kadar.',
     s2t: 'Mağaza tasarımı',        s2d: 'Satan satış alanları – Potsdamer Platz Arkaden, Alexa ve Ringcenter Berlin, Schlossparkcenter Schwerin gibi.',
     s3t: 'Fuar standı',            s3d: 'Akılda kalan fuar standları – Frankfurt, Münih, Köln, Berlin, Düsseldorf, Hannover, Milano, Madrid ve Paris fuarlarında.',
@@ -125,8 +123,6 @@
     s8t: 'Mobilya tasarımı',       s8d: 'Tek parça ve seri mobilya, atölye ve endüstriyel üretim için detaylandırılmış.',
 
     projEyebrow: 'Projeler',
-    projTitle: 'Görülmeye değer referanslar.',
-    projLead: 'Arşivden bir kesit: endüstriyel yapı, iç yapım, konut ve mağaza tasarımı. Büyütmek için tıklayın.',
     mehrBtn: 'Tüm projeleri göster',
 
     intlEyebrow: 'Uluslararası',
@@ -143,8 +139,6 @@
     q4t: 'Uzmanlık',   q4d: 'Mağaza, fuar, endüstriyel yapı, restorasyon, koruma, ürün ve mobilya tasarımı',
 
     contactEyebrow: 'İletişim',
-    contactTitle: 'Projenizi bize anlatın.',
-    contactLead: 'Kısa bir telefon ya da üç satır yeterli. Genellikle bir iş günü içinde dönüş yapıyoruz.',
     kAddr: 'Adres', kPhone: 'Telefon', kFax: 'Faks', kMail: 'E-posta', kVat: 'Vergi no.',
     fName: 'Adınız', fMail: 'E-posta', fTel: 'Telefon (isteğe bağlı)', fTopic: 'Konu', fMsg: 'Projeniz', fSend: 'Talebi gönder',
     o1: 'Mimarlık / yeni yapı', o2: 'Mağaza tasarımı', o3: 'Fuar standı', o4: 'Endüstriyel yapı',
