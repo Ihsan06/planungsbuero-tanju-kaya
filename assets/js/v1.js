@@ -145,8 +145,7 @@
 
     fCol1: 'Planungsbüro Tanju Kaya', fCol2: 'Menü', fCol3: 'İletişim',
     footAbout: 'Mimarlık, mağaza tasarımı, fuar standı, endüstriyel yapı, restorasyon ve tasarım – Coburg’dan.',
-    fImpressum: 'Künye', fPrivacy: 'Gizlilik',
-    footDemo: 'Web sitesi: Ihsan Yılmaz'
+    fImpressum: 'Künye', fPrivacy: 'Gizlilik'
   };
 
   const DE = {};
